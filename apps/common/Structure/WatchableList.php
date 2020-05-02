@@ -35,7 +35,16 @@ class WatchableList
             $i++;
         }
 
+        $i = 0;
+        foreach ($this->current_items as $r) {
+            if ($r->equals($item)) {
+                unset($this->current_items[$i]);
+            }
+            $i++;
+        }
+
         $this->added_items[] = $item;
+        $this->current_items[] = $item;
     }
 
     public function remove($item)
@@ -50,7 +59,20 @@ class WatchableList
             $i++;
         }
 
+        $i = 0;
+        foreach ($this->current_items as $a) {
+            if ($a->equals($item)) {
+                unset($this->current_items[$i]);
+            }
+            $i++;
+        }
+
         $this->removed_items[] = $item;
+    }
+
+    public function count(): int
+    {
+        return count($this->current_items);
     }
 
     public function getAddedItems(): array
@@ -58,13 +80,22 @@ class WatchableList
         return $this->added_items;
     }
 
+    public function getRemovedItems(): array
+    {
+        return $this->removed_items;
+    }
+
     public function getCurrentItems(): array
     {
         return $this->current_items;
     }
 
-    public function getRemovedItems(): array
+    public function setCurrentItems(array $items): array
     {
-        return $this->removed_items;
+        foreach ($items as $item) {
+            assert($item instanceof $this->watched_class, new \TypeError("Item must be a type of " . $this->watched_class));
+        }
+
+        return $this->current_items = $items;
     }
 }
