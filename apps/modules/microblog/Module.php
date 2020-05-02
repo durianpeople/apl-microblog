@@ -16,8 +16,9 @@ class Module implements ModuleDefinitionInterface
 
             'Microblog\Core\Domain\Interfaces' => __DIR__ . '/Core/Domain/Interfaces',
             'Microblog\Core\Domain\Event' => __DIR__ . '/Core/Domain/Event',
-            'Microblog\Core\Domain\Model\Entity' => __DIR__ . '/Core/Domain/Model/Entity',
-            'Microblog\Core\Domain\Model\Value' => __DIR__ . '/Core/Domain/Model/Value',
+
+            'Microblog\Core\Domain\Model' => __DIR__ . '/Core/Domain/Model',
+            
             'Microblog\Core\Domain\Service' => __DIR__ . '/Core/Domain/Service',
 
             'Microblog\Core\Application\Request' => __DIR__ . '/Core/Application/Request',

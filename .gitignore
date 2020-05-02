@@ -1,18 +1,9 @@
-*
-!/apps
-!/apps/**
 /apps/cache
 /apps/cache/**
 /apps/lib
 /apps/lib/**
 /apps/.env
 
-!/public
-!/public/**
+/vendor
+/vendor/**
 
-!.gitignore
-!readme.md
-!*.mdj
-!*.jpg
-!.gitattributes
-!composer.json
