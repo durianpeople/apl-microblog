@@ -26,7 +26,8 @@ $loader->registerDirs(
 );
 
 $loader->registerNamespaces([
-    'Microblog\Core\Domain\Model' => APP_PATH . '/modules/microblog/Core/Domain/Model',
+    'Microblog\Core\Domain\Model\User' => APP_PATH . '/modules/microblog/Core/Domain/Model/User',
+    'Microblog\Core\Domain\Exception' => APP_PATH . '/modules/microblog/Core/Domain/Exception',
 ]);
 
 $loader->register();
