@@ -8,6 +8,8 @@ class WatchableList
 {
     /** @var EqualityComparable[] */
     protected array $added_items = [];
+    /** @var EqualityComparable */
+    protected array $current_items = [];
     /** @var EqualityComparable[] */
     protected array $removed_items = [];
 
@@ -54,6 +56,11 @@ class WatchableList
     public function getAddedItems(): array
     {
         return $this->added_items;
+    }
+
+    public function getCurrentItems(): array
+    {
+        return $this->current_items;
     }
 
     public function getRemovedItems(): array
