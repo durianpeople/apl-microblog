@@ -16,16 +16,14 @@ class WatchableList
     public function __construct(string $watched_class)
     {
         $interfaces = class_implements($watched_class, true);
-        if (!($interfaces && in_array(EqualityComparable::class, $interfaces)))
-            throw new \TypeError("Class must be equality comparable");
+        assert(($interfaces && in_array(EqualityComparable::class, $interfaces)), new \TypeError("Class must be equality comparable"));
 
         $this->watched_class = $watched_class;
     }
 
     public function add($item)
     {
-        if (!($item instanceof $this->watched_class)) 
-            throw new \TypeError("Item must be a type of " . $this->watched_class);
+        assert(($item instanceof $this->watched_class), new \TypeError("Item must be a type of " . $this->watched_class));
 
         $i = 0;
         foreach ($this->removed_items as $r) {
@@ -40,8 +38,7 @@ class WatchableList
 
     public function remove($item)
     {
-        if (!($item instanceof $this->watched_class)) 
-            throw new \TypeError("Item must be a type of " . $this->watched_class);
+        assert(($item instanceof $this->watched_class), new \TypeError("Item must be a type of " . $this->watched_class));
 
         $i = 0;
         foreach ($this->added_items as $a) {

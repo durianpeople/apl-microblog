@@ -8,6 +8,8 @@ error_reporting(E_ALL);
 define("ROOT_PATH", __DIR__);
 define("APP_PATH", ROOT_PATH . '/../apps');
 
+ini_set('assert.exception', true);
+
 set_include_path(
     ROOT_PATH . PATH_SEPARATOR . get_include_path()
 );

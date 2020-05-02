@@ -16,7 +16,7 @@ class UserID
 
     public function __construct(string $guid)
     {
-        if (strlen($guid) > 36 || strlen($guid) < 36) throw new UuidAssertionError;
+        assert(strlen($guid) == 36, new UuidAssertionError);
         $this->guid = $guid;
     }
 

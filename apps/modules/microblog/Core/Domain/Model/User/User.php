@@ -49,7 +49,8 @@ class User
 
     public function changePassword(string $old_password, Password $new_password)
     {
-        if (!$this->password->testAgainst($old_password)) throw new WrongPasswordException;
+        assert($this->password->testAgainst($old_password), new WrongPasswordException);
+        
         $this->password = $new_password;
     }
 }

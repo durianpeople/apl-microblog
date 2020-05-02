@@ -10,7 +10,7 @@ class Username
 
     public function __construct(string $username)
     {
-        if (!(strlen($username) <= 15 && ctype_alnum($username))) throw new UsernameAssertionError;
+        assert((strlen($username) <= 15 && ctype_alnum($username)), new UsernameAssertionError);
 
         $this->username = $username;
     }
