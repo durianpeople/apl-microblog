@@ -1,5 +1,8 @@
 <?php
 
+use Microblog\Infrastructure\Persistence\Repository\TweetRepository;
+use Phalcon\Di;
+use Phalcon\Di\FactoryDefault;
 use Phalcon\Loader;
 
 ini_set("display_errors", 1);
@@ -30,17 +33,36 @@ $loader->registerDirs(
 $loader->registerNamespaces([
     'Common\Interfaces' => APP_PATH . '/common/Interfaces',
     'Common\Structure' => APP_PATH . '/common/Structure',
+    'Microblog\Core\Domain\Exception' => APP_PATH . '/modules/microblog/Core/Domain/Exception',
     'Microblog\Core\Domain\Model\User' => APP_PATH . '/modules/microblog/Core/Domain/Model/User',
     'Microblog\Core\Domain\Model\Tweet' => APP_PATH . '/modules/microblog/Core/Domain/Model/Tweet',
-    'Microblog\Core\Domain\Exception' => APP_PATH . '/modules/microblog/Core/Domain/Exception',
+    'Microblog\Core\Domain\Interfaces' => APP_PATH . '/modules/microblog/Core/Domain/Interfaces',
+
+    'Microblog\Infrastructure\Persistence\Mapper' => APP_PATH . '/modules/microblog/Infrastructure/Persistence/Mapper',
+    'Microblog\Infrastructure\Persistence\Repository' => APP_PATH . '/modules/microblog/Infrastructure/Persistence/Repository',
+    'Microblog\Infrastructure\Persistence\Record' => APP_PATH . '/modules/microblog/Infrastructure/Persistence/Record',
 ]);
 
 $loader->register();
 
-// $di = new FactoryDefault();
+$di = new FactoryDefault();
 
-// Di::reset();
+Di::reset();
 
 // // Add any needed services to the DI here
 
-// Di::setDefault($di);
+$di->set('db', function () {
+    $adapter = Phalcon\Db\Adapter\Pdo\Mysql::class;
+    return new $adapter([
+        'host'     => 'localhost',
+        'username' => 'root',
+        'password' => '',
+        'dbname'   => 'apl_microblog',
+    ]);
+});
+
+$di->set('tweetRepository', function() {
+    return new TweetRepository;
+});
+
+Di::setDefault($di);
