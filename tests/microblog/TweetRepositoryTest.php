@@ -23,7 +23,7 @@ class TweetRepositoryTest extends TestCase
     {
 
         $tweet = new Tweet(new TweetID("ce66f41c-296b-4581-a72b-732fe140c2d3"), new DateTime(), UserID::generate(), "Halo, ini @seseorang, bersama @seseorangB. Kita lagi #dirumahaja.", 0);
-        $tweet->addLike(UserID::generate());
+        $tweet->addLike($uid = UserID::generate());
         $tweet->addLike(UserID::generate());
 
         self::$repo->persist($tweet);
@@ -32,6 +32,13 @@ class TweetRepositoryTest extends TestCase
 
         $this->assertEquals($tweet->id, $anothertweet->id);
         $this->assertEquals(2, $anothertweet->likes_count);
+
+        $anothertweet->removeLike($uid);
+        self::$repo->persist($anothertweet);
+
+        $yetanothertweet = self::$repo->find(new TweetID("ce66f41c-296b-4581-a72b-732fe140c2d3"));
+
+        $this->assertEquals(1, $yetanothertweet->likes_count);
     }
 
     public function testCanBeDeleted()
