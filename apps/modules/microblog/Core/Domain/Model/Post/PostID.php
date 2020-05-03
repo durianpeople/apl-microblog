@@ -1,17 +1,17 @@
 <?php
 
-namespace Microblog\Core\Domain\Model\Tweet;
+namespace Microblog\Core\Domain\Model\Post;
 
 use Microblog\Core\Domain\Exception\UuidAssertionError;
 use Ramsey\Uuid\Uuid;
 
-class TweetID
+class PostID
 {
     protected string $guid;
 
-    public static function generate(): TweetID
+    public static function generate(): PostID
     {
-        return new TweetID(Uuid::uuid4()->toString());
+        return new PostID(Uuid::uuid4()->toString());
     }
 
     public function __construct(string $guid)

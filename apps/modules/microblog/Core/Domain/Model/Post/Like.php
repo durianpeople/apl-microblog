@@ -1,6 +1,6 @@
 <?php
 
-namespace Microblog\Core\Domain\Model\Tweet;
+namespace Microblog\Core\Domain\Model\Post;
 
 use Common\Interfaces\EqualityComparable;
 use Microblog\Core\Domain\Model\User\UserID;

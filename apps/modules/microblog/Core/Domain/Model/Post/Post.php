@@ -1,6 +1,6 @@
 <?php
 
-namespace Microblog\Core\Domain\Model\Tweet;
+namespace Microblog\Core\Domain\Model\Post;
 
 use Common\Structure\WatchableList;
 use DateTime;
@@ -8,9 +8,9 @@ use Microblog\Core\Domain\Model\User\UserID;
 use Microblog\Core\Domain\Model\User\Username;
 
 /**
- * @property-read TweetID $id
+ * @property-read PostID $id
  * @property-read DateTime $created_at
- * @property-read UserID $tweeter_id
+ * @property-read UserID $poster_id
  * @property-read string $content
  * @property-read Username[] $mentions
  * @property-read Hashtag[] $hashtags
@@ -18,11 +18,11 @@ use Microblog\Core\Domain\Model\User\Username;
  * @property-read Like[] $added_likes
  * @property-read Like[] $removed_likes
  */
-class Tweet
+class Post
 {
-    protected TweetID $id;
+    protected PostID $id;
     protected DateTime $created_at;
-    protected UserID $tweeter_id;
+    protected UserID $poster_id;
     protected string $content;
     /** @var Username[] */
     protected array $mentions = [];
@@ -31,16 +31,16 @@ class Tweet
     protected WatchableList $likes;
     protected int $likes_count;
 
-    public static function create(UserID $tweeter_id, string $tweet_content)
+    public static function create(UserID $poster_id, string $post_content)
     {
-        return new Tweet(TweetID::generate(), new DateTime(), $tweeter_id, $tweet_content, 0);
+        return new Post(PostID::generate(), new DateTime(), $poster_id, $post_content, 0);
     }
 
-    public function __construct(TweetID $id, DateTime $created_at, UserID $tweeter_id, string $content, int $likes_count)
+    public function __construct(PostID $id, DateTime $created_at, UserID $poster_id, string $content, int $likes_count)
     {
         $this->id = $id;
         $this->created_at = $created_at;
-        $this->tweeter_id = $tweeter_id;
+        $this->poster_id = $poster_id;
         $this->content = $content;
         $this->likes_count = $likes_count;
 
@@ -67,8 +67,8 @@ class Tweet
                 return $this->id;
             case 'created_at':
                 return $this->created_at;
-            case 'tweeter_id':
-                return $this->tweeter_id;
+            case 'poster_id':
+                return $this->poster_id;
             case 'content':
                 return $this->content;
             case 'mentions':

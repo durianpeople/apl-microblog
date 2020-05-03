@@ -1,6 +1,6 @@
 <?php
 
-use Microblog\Infrastructure\Persistence\Repository\TweetRepository;
+use Microblog\Infrastructure\Persistence\Repository\PostRepository;
 use Phalcon\Di;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Loader;
@@ -35,7 +35,7 @@ $loader->registerNamespaces([
     'Common\Structure' => APP_PATH . '/common/Structure',
     'Microblog\Core\Domain\Exception' => APP_PATH . '/modules/microblog/Core/Domain/Exception',
     'Microblog\Core\Domain\Model\User' => APP_PATH . '/modules/microblog/Core/Domain/Model/User',
-    'Microblog\Core\Domain\Model\Tweet' => APP_PATH . '/modules/microblog/Core/Domain/Model/Tweet',
+    'Microblog\Core\Domain\Model\Post' => APP_PATH . '/modules/microblog/Core/Domain/Model/Post',
     'Microblog\Core\Domain\Interfaces' => APP_PATH . '/modules/microblog/Core/Domain/Interfaces',
 
     'Microblog\Infrastructure\Persistence\Mapper' => APP_PATH . '/modules/microblog/Infrastructure/Persistence/Mapper',
@@ -61,8 +61,8 @@ $di->set('db', function () {
     ]);
 });
 
-$di->set('tweetRepository', function() {
-    return new TweetRepository;
+$di->set('postRepository', function() {
+    return new PostRepository;
 });
 
 Di::setDefault($di);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Microblog\Core\Domain\Model\Tweet;
+namespace Microblog\Core\Domain\Model\Post;
 
 use Microblog\Core\Domain\Exception\HashtagAssertionError;
 
