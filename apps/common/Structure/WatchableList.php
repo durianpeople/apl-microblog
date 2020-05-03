@@ -87,7 +87,6 @@ class WatchableList
 
         if ($this->isAddedItem($item)) {
             $this->removeFromAdded($item);
-            return;
         }
 
         if (!$this->isRemovedItem($item)) {
