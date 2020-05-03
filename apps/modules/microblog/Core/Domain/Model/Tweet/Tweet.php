@@ -15,6 +15,8 @@ use Microblog\Core\Domain\Model\User\Username;
  * @property-read Username[] $mentions
  * @property-read Hashtag[] $hashtags
  * @property-read int $likes_count
+ * @property-read Like[] $added_likes
+ * @property-read Like[] $removed_likes
  */
 class Tweet
 {
@@ -75,6 +77,10 @@ class Tweet
                 return $this->hashtags;
             case 'likes_count':
                 return $this->likes_count;
+            case 'added_likes':
+                return $this->likes->getAddedItems();
+            case 'removed_likes':
+                return $this->likes->getRemovedItems();
             default:
                 throw new \RuntimeException();
         }
@@ -83,12 +89,10 @@ class Tweet
     public function addLike(UserID $user_id)
     {
         $this->likes->add(new Like($user_id));
-        $this->likes_count++;
     }
 
     public function removeLike(UserID $user_id)
     {
         $this->likes->remove(new Like($user_id));
-        $this->likes_count--;
     }
 }

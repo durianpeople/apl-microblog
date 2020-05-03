@@ -31,15 +31,8 @@ class TweetMapper
      */
     public static function toAddedLikesRecord(Tweet $tweet): array
     {
-        $reflection = new ReflectionClass(Tweet::class);
-        $likes_getter = $reflection->getProperty("likes");
-        $likes_getter->setAccessible(true);
-
-        /** @var WatchableList */
-        $likes = $likes_getter->getValue($tweet);
-
         $likes_records = [];
-        foreach ($likes->getAddedItems() as $l) {
+        foreach ($tweet->added_likes as $l) {
             /** @var Like $l */
             $lr = new LikesRecord();
             $lr->tweet_id = $tweet->id->getString();
@@ -56,15 +49,8 @@ class TweetMapper
      */
     public static function toRemovedLikesRecord(Tweet $tweet): array
     {
-        $reflection = new ReflectionClass(Tweet::class);
-        $likes_getter = $reflection->getProperty("likes");
-        $likes_getter->setAccessible(true);
-
-        /** @var WatchableList */
-        $likes = $likes_getter->getValue($tweet);
-
         $likes_records = [];
-        foreach ($likes->getRemovedItems() as $l) {
+        foreach ($tweet->removed_likes as $l) {
             /** @var Like $l */
             $lr = new LikesRecord();
             $lr->tweet_id = $tweet->id->getString();

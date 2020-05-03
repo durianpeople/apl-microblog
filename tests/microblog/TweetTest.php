@@ -25,9 +25,9 @@ class TweetTest extends TestCase
         $user_id = UserID::generate();
 
         $tweet->addLike($user_id);
-        $this->assertEquals(1, $tweet->likes_count);
+        $this->assertEquals(1, count($tweet->added_likes));
 
         $tweet->removeLike($user_id);
-        $this->assertEquals(0, $tweet->likes_count);
+        $this->assertEquals(1, count($tweet->removed_likes));
     }
 }
