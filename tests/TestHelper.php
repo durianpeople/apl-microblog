@@ -28,7 +28,10 @@ $loader->registerDirs(
 );
 
 $loader->registerNamespaces([
+    'Common\Interfaces' => APP_PATH . '/common/Interfaces',
+    'Common\Structure' => APP_PATH . '/common/Structure',
     'Microblog\Core\Domain\Model\User' => APP_PATH . '/modules/microblog/Core/Domain/Model/User',
+    'Microblog\Core\Domain\Model\Tweet' => APP_PATH . '/modules/microblog/Core/Domain/Model/Tweet',
     'Microblog\Core\Domain\Exception' => APP_PATH . '/modules/microblog/Core/Domain/Exception',
 ]);
 
