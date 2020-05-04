@@ -26,6 +26,18 @@ class PostRepository implements IPostRepository
         return PostMapper::toModel($post_record);
     }
 
+    public function all(): array
+    {
+        $post_records = PostRecord::find();
+
+        $posts = [];
+        foreach ($post_records as $pr) {
+            $posts[] = PostMapper::toModel($pr);
+        }
+
+        return $posts;
+    }
+
     public function persist(Post $post)
     {
         $trx = (new Manager())->get();
