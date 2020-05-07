@@ -63,8 +63,8 @@ $di->set('db', function () {
     ]);
 });
 
-$di->set('postRepository', function() {
-    return new PostRepository;
+$di->set('postRepository', function() use ($di) {
+    return new PostRepository($di);
 });
 
 Di::setDefault($di);

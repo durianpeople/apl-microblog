@@ -17,6 +17,11 @@ interface IPostRepository
      * @return Hashtag[]
      */
     public function getAllHashtags(): array;
+    /**
+     * @param Hashtag $hashtag
+     * @return Post[]
+     */
+    public function getPostsByHastag(Hashtag $hashtag): array;
     public function persist(Post $tweet);
     public function delete(Post $tweet);
 }

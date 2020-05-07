@@ -10,10 +10,19 @@ use Microblog\Core\Domain\Model\Post\PostID;
 use Microblog\Infrastructure\Persistence\Mapper\PostMapper;
 use Microblog\Infrastructure\Persistence\Record\HashtagRecord;
 use Microblog\Infrastructure\Persistence\Record\PostRecord;
+use Phalcon\Di\DiInterface;
+use Phalcon\Mvc\Model\Query;
 use Phalcon\Mvc\Model\Transaction\Manager;
 
 class PostRepository implements IPostRepository
 {
+    protected DiInterface $di;
+
+    public function __construct(DiInterface $di)
+    {
+        $this->di = $di;
+    }
+
     public function find(PostID $post_id): Post
     {
         $post_record = PostRecord::findFirst([
@@ -40,9 +49,6 @@ class PostRepository implements IPostRepository
         return $posts;
     }
 
-    /**
-     * @return Hashtag[]
-     */
     public function getAllHashtags(): array
     {
         $hashtags = [];
@@ -52,6 +58,28 @@ class PostRepository implements IPostRepository
         }
 
         return $hashtags;
+    }
+
+    public function getPostsByHastag(Hashtag $hashtag): array
+    {
+        $query = new Query(
+            'SELECT PostRecord.*
+            FROM PostRecord
+            JOIN HashtagRecord
+            ON HashtagRecord.post_id = PostRecord.id',
+            $this->di
+        );
+
+        /** @var PostRecord[] */
+        $post_records = $query->execute();
+
+        $posts = [];
+
+        foreach ($post_records as $pr) {
+            $posts[] = PostMapper::toModel($pr);
+        }
+
+        return $posts;
     }
 
     public function persist(Post $post)
