@@ -7,6 +7,7 @@ use Microblog\Core\Domain\Model\Post\Like;
 use Microblog\Core\Domain\Model\Post\Post;
 use Microblog\Core\Domain\Model\Post\PostID;
 use Microblog\Core\Domain\Model\User\UserID;
+use Microblog\Infrastructure\Persistence\Record\HashtagRecord;
 use Microblog\Infrastructure\Persistence\Record\LikesRecord;
 use Microblog\Infrastructure\Persistence\Record\PostRecord;
 
@@ -57,6 +58,24 @@ class PostMapper
         }
 
         return $likes_records;
+    }
+
+    /**
+     * @param Post $post
+     * @return HashtagRecord[]
+     */
+    public static function toHashtagRecord(Post $post): array
+    {
+        $hashtag_records = [];
+        foreach ($post->hashtags as $h) {
+            $hr = new HashtagRecord();
+            $hr->post_id = $post->id->getString();
+            $hr->hashtag = $h->getString();
+
+            $hashtag_records[] = $hr;
+        }
+
+        return $hashtag_records;
     }
 
     public static function toModel(PostRecord $post_record): Post

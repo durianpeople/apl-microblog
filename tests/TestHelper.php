@@ -33,6 +33,8 @@ $loader->registerDirs(
 $loader->registerNamespaces([
     'Common\Interfaces' => APP_PATH . '/common/Interfaces',
     'Common\Structure' => APP_PATH . '/common/Structure',
+    'Common\Utility' => APP_PATH . '/common/Utility',
+
     'Microblog\Core\Domain\Exception' => APP_PATH . '/modules/microblog/Core/Domain/Exception',
     'Microblog\Core\Domain\Model\User' => APP_PATH . '/modules/microblog/Core/Domain/Model/User',
     'Microblog\Core\Domain\Model\Post' => APP_PATH . '/modules/microblog/Core/Domain/Model/Post',

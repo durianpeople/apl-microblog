@@ -4,9 +4,11 @@ namespace Microblog\Infrastructure\Persistence\Repository;
 
 use Microblog\Core\Domain\Exception\NotFoundException;
 use Microblog\Core\Domain\Interfaces\IPostRepository as IPostRepository;
+use Microblog\Core\Domain\Model\Post\Hashtag;
 use Microblog\Core\Domain\Model\Post\Post;
 use Microblog\Core\Domain\Model\Post\PostID;
 use Microblog\Infrastructure\Persistence\Mapper\PostMapper;
+use Microblog\Infrastructure\Persistence\Record\HashtagRecord;
 use Microblog\Infrastructure\Persistence\Record\PostRecord;
 use Phalcon\Mvc\Model\Transaction\Manager;
 
@@ -38,21 +40,52 @@ class PostRepository implements IPostRepository
         return $posts;
     }
 
+    /**
+     * @return Hashtag[]
+     */
+    public function getAllHashtags(): array
+    {
+        $hashtags = [];
+        foreach (HashtagRecord::find() as $hr) {
+            /** @var HashtagRecord $hr */
+            $hashtags[] = new Hashtag($hr->hashtag);
+        }
+
+        return $hashtags;
+    }
+
     public function persist(Post $post)
     {
         $trx = (new Manager())->get();
         try {
+            // Save post data
             $post_record = PostMapper::toPostRecord($post);
             $post_record->save();
 
+            // Add likes to database
             $added_likes = PostMapper::toAddedLikesRecord($post);
             foreach ($added_likes as $added_like) {
                 $added_like->save();
             }
 
+            // Remove likes from database
             $removed_likes = PostMapper::toRemovedLikesRecord($post);
             foreach ($removed_likes as $removed_like) {
                 $removed_like->delete();
+            }
+
+            // Clear all hashtags from database
+            HashtagRecord::find([
+                'condition' => 'post_id = :post_id:',
+                'bind' => [
+                    'post_id' => $post->id->getString()
+                ]
+            ])->delete();
+
+            // Re-add hashtags to database
+            $hashtag_records = PostMapper::toHashtagRecord($post);
+            foreach ($hashtag_records as $hr) {
+                $hr->save();
             }
 
             $trx->commit();
