@@ -32,7 +32,6 @@ class PostMapper
     {
         $likes_records = [];
         foreach ($post->added_likes as $l) {
-            /** @var Like $l */
             $lr = new LikesRecord();
             $lr->post_id = $post->id->getString();
             $lr->user_id = $l->user_id->getString();

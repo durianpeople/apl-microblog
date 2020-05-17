@@ -7,10 +7,12 @@ use Microblog\Core\Domain\Exception\WrongPasswordException;
 
 /**
  * @property-read UserID $id
- * @property-read string $username
+ * @property-read Username $username
  * @property-read Password $password
  * @property-read int $following_count
  * @property-read int $follower_count
+ * @property-read UserID[] $added_followings
+ * @property-read UserID[] $removed_followings
  */
 class User
 {
@@ -50,6 +52,10 @@ class User
                 return $this->following_count;
             case 'follower_count':
                 return $this->follower_count;
+            case 'added_followings':
+                return $this->following->getAddedItems();
+            case 'removed_followings':
+                return $this->following->getRemovedItems();
         }
     }
 
