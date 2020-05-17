@@ -103,12 +103,7 @@ class PostRepository implements IPostRepository
             }
 
             // Clear all hashtags from database
-            HashtagRecord::find([
-                'condition' => 'post_id = :post_id:',
-                'bind' => [
-                    'post_id' => $post->id->getString()
-                ]
-            ])->delete();
+            $post_record->hashtags->delete();
 
             // Re-add hashtags to database
             $hashtag_records = PostMapper::toHashtagRecord($post);
@@ -129,6 +124,7 @@ class PostRepository implements IPostRepository
         try {
             $post_record = PostMapper::toPostRecord($post);
             $post_record->likes->delete();
+            $post_record->hashtags->delete();
             $post_record->delete();
 
             $trx->commit();

@@ -6,6 +6,7 @@ use Phalcon\Mvc\Model;
 
 /**
  * @property-read LikesRecord $likes
+ * @property-read HashtagRecord $hashtags
  */
 class PostRecord extends Model
 {
@@ -27,5 +28,14 @@ class PostRecord extends Model
                 'alias' => 'likes'
             ]
         );
+
+        $this->hasMany(
+            'id',
+            HashtagRecord::class,
+            'post_id',
+            [
+                'alias' => 'hashtags'
+            ]
+            );
     }
 }
