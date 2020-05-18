@@ -1,6 +1,7 @@
 <?php
 
 use Microblog\Infrastructure\Persistence\Repository\PostRepository;
+use Microblog\Infrastructure\Persistence\Repository\UserRepository;
 use Phalcon\Di;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Loader;
@@ -65,6 +66,10 @@ $di->set('db', function () {
 
 $di->set('postRepository', function() use ($di) {
     return new PostRepository($di);
+});
+
+$di->set('userRepository', function() use ($di) {
+    return new UserRepository($di);
 });
 
 Di::setDefault($di);

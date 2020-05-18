@@ -32,7 +32,8 @@ class PostRepository implements IPostRepository
             ]
         ]);
 
-        if ($post_record == null) throw new NotFoundException;
+        if ($post_record == null)
+            throw new NotFoundException;
 
         return PostMapper::toModel($post_record);
     }

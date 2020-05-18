@@ -23,20 +23,21 @@ class UserRepository implements IUserRepository
     public function find(UserID $user_id): User
     {
         $user_record = UserRecord::findFirst([
-            'condition' => 'id = :id:',
+            'conditions' => 'id = :id:',
             'bind' => [
                 'id' => $user_id->getString()
             ]
         ]);
 
-        if ($user_record == null) throw new NotFoundException;
+        if ($user_record == null)
+            throw new NotFoundException;
 
         return UserMapper::toModel($user_record);
     }
 
     public function persist(User $user)
     {
-        TrxClosure::execute(function() use ($user) {
+        TrxClosure::execute(function () use ($user) {
             $user_record = UserMapper::toUserRecord($user);
             $user_record->save();
 
@@ -49,6 +50,15 @@ class UserRepository implements IUserRepository
             foreach ($removed_followings as $af) {
                 $af->delete();
             }
+        });
+    }
+
+    public function delete(User $user)
+    {
+        TrxClosure::execute(function () use ($user) {
+            $user_record = UserMapper::toUserRecord($user);
+            $user_record->following->delete();
+            $user_record->delete();
         });
     }
 }
