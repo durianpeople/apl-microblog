@@ -17,32 +17,24 @@
       </div> -->
     </div>
     <ul class="collection">
+        {%for notif in notifications%}
         <li class="collection-item avatar">
-          <i class="material-icons circle gray">notifications_none</i>
-          <span class="title">Yovi Agustian</span> - <a href="#">@yoviag</a>
-          <p class="truncate">Loves you</p>
-          <small> 20 Maret 2020 </small>
+          <i class="material-icons circle {{notif.is_read ? 'gray' : 'blue'}}">notifications_none</i>
+          <span class="title"><a href="#">@{{notif.username}}</a>
+          <p class="truncate">{{notif.content}}</p>
+          <small> {{notif.created_at}} </small>
           <div class="secondary-content row">
             <div class="col s12">
               <!-- <a href="#"><i class="material-icons">check</i></a> -->
+              {%if notif.type_about is 'post'%}
+              <a href="/read?guid={{notif.guid}}&uid={{notif.owner_id}}&type={{notif.type_about}}&id={{notif.id_about}}"><i class="material-icons">visibility</i></a>
+              {%endif%}
               <a href="#"><i class="material-icons">search</i></a>
               <a href="#"><i class="material-icons">delete</i></a>
             </div>
           </div>  
         </li>
-        <li class="collection-item avatar">
-          <i class="material-icons circle red">notifications_active</i>
-          <span class="title">Yovi Agustian</span> | <a href="#">@yoviag</a>
-          <p class="truncate">Mentions you</p>
-          <small> 20 Maret 2020 </small>
-          <div class="secondary-content row">
-            <div class="col s12">
-              <a href="#"><i class="material-icons">check</i></a>
-              <a href="#"><i class="material-icons">search</i></a>
-              <a href="#"><i class="material-icons">delete</i></a>
-            </div>
-          </div>  
-        </li>
+        {%endfor%}
         
       </ul>
   </div>

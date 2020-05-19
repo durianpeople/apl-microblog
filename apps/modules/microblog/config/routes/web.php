@@ -62,3 +62,8 @@ $router->add('/post/unlike/{id}', array_merge($mod_config, [
     'controller' => 'postdetail',
     'action' => 'unlike'
 ]));
+
+$router->add('/read', array_merge($mod_config, [
+    'controller' => 'notifikasi',
+    'action' => 'read'
+]));
