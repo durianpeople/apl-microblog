@@ -13,7 +13,9 @@ use Microblog\Core\Application\Service\RegisterService;
 use Microblog\Core\Application\Service\UnLikePostService;
 use Microblog\Core\Application\Service\ViewPostService;
 use Microblog\Core\Application\Service\EditUserService;
-use Microblog\Core\Application\Service\ViewUserInfoService;
+use Microblog\Core\Application\Service\UnfollowUserService;
+use Microblog\Core\Application\Service\FollowUserService;
+use Microblog\Core\Application\Service\viewUserInfoService;
 use Microblog\Infrastructure\Persistence\Repository\PostRepository;
 use Microblog\Infrastructure\Persistence\Repository\UserRepository;
 use Phalcon\Di\DiInterface;
@@ -103,6 +105,15 @@ $di->set('editUserService', function() use ($di){
 $di->set('viewUserInfoService', function() use ($di){
     return new ViewUserInfoService($di->get('userRepository'));
 });
+
+$di->set('followUserService', function() use ($di){
+    return new FollowUserService($di->get('userRepository'));
+});
+
+$di->set('unfollowUserService', function() use ($di){
+    return new UnfollowUserService($di->get('userRepository'));
+});
+
 #endregion
 
 DomainEventPublisher::instance()->subscribe(new NotificationEventSubscriber($di->get('createNotificationService'), $di->get('userRepository')));

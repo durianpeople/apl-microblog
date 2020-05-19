@@ -6,8 +6,8 @@
         <div class="card" >
           <div class="card-content black-text row">
             <div class="right">
-              <a href="#" class="btn blue">Following</a>
-              <a href="#" class="btn blue">Setup Profile</a>
+              <a href="/follow/{{complete_user_info.id}}" class="btn blue">Follow</a>
+              <a href="/unfollow/{{complete_user_info.id}}" class="btn blue">Unfollow</a>
             </div>
             <div class="col s12 m6">
               <span class="card-title">_defunction
