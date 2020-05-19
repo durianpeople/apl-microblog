@@ -5,6 +5,14 @@ namespace Microblog\Core\Domain\Model\Notification;
 use DateTime;
 use Microblog\Core\Domain\Model\User\UserID;
 
+/**
+ * @property-read NotificationID $id
+ * @property-read UserID $owner_id
+ * @property-read DateTime $created_at
+ * @property-read string $content
+ * @property-read Detail $detail
+ * @property-read bool $is_read
+ */
 class Notification
 {
     protected NotificationID $id;
@@ -27,6 +35,24 @@ class Notification
         $this->content = $content;
         $this->detail = $detail;
         $this->is_read = $is_read;
+    }
+
+    public function __get($name)
+    {
+        switch ($name) {
+            case 'id':
+                return $this->id;
+            case 'owner_id':
+                return $this->owner_id;
+            case 'created_at':
+                return $this->created_at;
+            case 'content':
+                return $this->content;
+            case 'detail':
+                return $this->detail;
+            case 'is_read':
+                return $this->is_read;
+        }
     }
 
     public function markAsRead()
