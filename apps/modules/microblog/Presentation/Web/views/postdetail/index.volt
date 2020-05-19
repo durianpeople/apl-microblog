@@ -13,7 +13,7 @@
                 <h5 class="title">{{post.username}}</h5>
                 <p>{{post.content}}</p>
                 <a href="/post/like/{{post.id}}"><i class="far fa-heart"></i> {{post.likes_count}}</a><br>
-                <a href="/post/unlike/{{post.id}}"><i class="far fa-heart"></i>}</a>
+                <a href="/post/unlike/{{post.id}}"><i class="material-icons prefix">delete</i></a>
             </div>
           </div>
         </div>
