@@ -15,9 +15,9 @@ class CreatePostService
     protected IPostRepository $post_repo;
     protected IUserRepository $user_repo;
 
-    public function __construct(IPostRepository $forum_repo, IPostRepository $user_repo)
+    public function __construct(IPostRepository $post_repo, IUserRepository $user_repo)
     {
-        $this->post_repo = $forum_repo;
+        $this->post_repo = $post_repo;
         $this->user_repo = $user_repo;
     }
 

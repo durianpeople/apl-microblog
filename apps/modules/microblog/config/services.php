@@ -1,7 +1,15 @@
 <?php
 
+use Common\Utility\DomainEventPublisher;
+use Microblog\Core\Application\EventSubscriber\NotificationEventSubscriber;
+use Microblog\Core\Application\Service\CreateNotificationService;
+use Microblog\Core\Application\Service\CreatePostService;
+use Microblog\Core\Application\Service\LikePostService;
+use Microblog\Core\Application\Service\ListAllPostByUserIDService;
 use Microblog\Core\Application\Service\LoginService;
 use Microblog\Core\Application\Service\RegisterService;
+use Microblog\Core\Application\Service\UnLikePostService;
+use Microblog\Core\Application\Service\ViewPostService;
 use Microblog\Infrastructure\Persistence\Repository\PostRepository;
 use Microblog\Infrastructure\Persistence\Repository\UserRepository;
 use Phalcon\Di\DiInterface;
@@ -33,22 +41,48 @@ $di->set('db', function () {
 });
 
 #region Repositories
-$di->set('userRepository', function() use ($di){
+$di->set('userRepository', function () use ($di) {
     return new UserRepository($di);
 });
 
-$di->set('postRepository', function() use ($di){
+$di->set('postRepository', function () use ($di) {
     return new PostRepository($di);
 });
 #endregion
 
 
 #region Application Services
-$di->set('loginService', function() use ($di) {
+$di->set('loginService', function () use ($di) {
     return new LoginService($di->get('userRepository'));
 });
 
-$di->set('registerService', function() use ($di) {
+$di->set('registerService', function () use ($di) {
     return new RegisterService($di->get('userRepository'));
 });
+
+$di->set('createNotificationService', function () use ($di) {
+    return new CreateNotificationService($di->get('userRepository'));
+});
+
+$di->set('listAllPostByUserIDService', function () use ($di) {
+    return new ListAllPostByUserIDService($di->get('postRepository'), $di->get('userRepository'));
+});
+
+$di->set('createPostService', function() use ($di){
+    return new CreatePostService($di->get('postRepository'), $di->get('userRepository'));
+});
+
+$di->set('viewPostService', function() use ($di){
+    return new ViewPostService($di->get('postRepository'), $di->get('userRepository'));
+});
+
+$di->set('likePostService', function() use ($di){
+    return new LikePostService($di->get('postRepository'));
+});
+
+$di->set('unlikePostService', function() use ($di){
+    return new UnLikePostService($di->get('postRepository'));
+});
 #endregion
+
+DomainEventPublisher::instance()->subscribe(new NotificationEventSubscriber($di->get('createNotificationService'), $di->get('userRepository')));

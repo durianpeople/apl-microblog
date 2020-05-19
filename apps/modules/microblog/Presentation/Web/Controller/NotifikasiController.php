@@ -4,7 +4,7 @@ namespace Microblog\Presentation\Web\Controller;
 
 use Phalcon\Mvc\Controller;
 
-class NotifikasiController extends Controller
+class NotifikasiController extends AuthenticatedController
 {
     public function indexAction()
     {
