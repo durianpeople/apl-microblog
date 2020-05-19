@@ -9,8 +9,10 @@ use Microblog\Core\Application\Service\ListAllHashtagService;
 use Microblog\Core\Application\Service\ListAllPostByUserIDService;
 use Microblog\Core\Application\Service\ListAllPostsByHashtagService;
 use Microblog\Core\Application\Service\LoginService;
+use Microblog\Core\Application\Service\MarkNotificationAsReadService;
 use Microblog\Core\Application\Service\RegisterService;
 use Microblog\Core\Application\Service\UnLikePostService;
+use Microblog\Core\Application\Service\ViewAllNotificationService;
 use Microblog\Core\Application\Service\ViewPostService;
 use Microblog\Core\Application\Service\EditUserService;
 use Microblog\Core\Application\Service\ViewUserInfoService;
@@ -102,6 +104,14 @@ $di->set('editUserService', function() use ($di){
 
 $di->set('viewUserInfoService', function() use ($di){
     return new ViewUserInfoService($di->get('userRepository'));
+
+$di->set('viewAllNotificationService', function() use ($di){
+    return new ViewAllNotificationService($di->get('userRepository'));
+});
+
+$di->set('markNotificationAsReadService', function() use ($di){
+    return new MarkNotificationAsReadService($di->get('userRepository'));
+
 });
 #endregion
 
