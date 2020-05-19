@@ -18,7 +18,9 @@ use Microblog\Core\Application\Service\DeletePostService;
 use Microblog\Core\Application\Service\ViewAllNotificationService;
 use Microblog\Core\Application\Service\ViewPostService;
 use Microblog\Core\Application\Service\EditUserService;
-use Microblog\Core\Application\Service\ViewUserInfoService;
+use Microblog\Core\Application\Service\UnfollowUserService;
+use Microblog\Core\Application\Service\FollowUserService;
+use Microblog\Core\Application\Service\viewUserInfoService;
 use Microblog\Infrastructure\Persistence\Repository\PostRepository;
 use Microblog\Infrastructure\Persistence\Repository\UserRepository;
 use Phalcon\Di\DiInterface;
@@ -95,6 +97,7 @@ $di->set('unlikePostService', function() use ($di){
 
 $di->set('deletePostService', function() use ($di){
     return new DeletePostService($di->get('postRepository'));
+});
 
 $di->set('listAllHashtagService', function() use ($di){
     return new ListAllHashtagService($di->get('postRepository'));
@@ -110,6 +113,7 @@ $di->set('editUserService', function() use ($di){
 
 $di->set('viewUserInfoService', function() use ($di){
     return new ViewUserInfoService($di->get('userRepository'));
+});
 
 $di->set('viewAllNotificationService', function() use ($di){
     return new ViewAllNotificationService($di->get('userRepository'));
@@ -120,6 +124,15 @@ $di->set('markNotificationAsReadService', function() use ($di){
 
 });
 
+
+$di->set('followUserService', function() use ($di){
+    return new FollowUserService($di->get('userRepository'));
+});
+
+$di->set('unfollowUserService', function() use ($di){
+    return new UnfollowUserService($di->get('userRepository'));
+});
+  
 $di->set('markAllNotificationsAsReadService', function() use ($di){
     return new MarkAllNotificationsAsReadService($di->get('userRepository'));
 });
