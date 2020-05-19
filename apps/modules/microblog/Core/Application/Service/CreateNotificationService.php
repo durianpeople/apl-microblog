@@ -19,9 +19,9 @@ class CreateNotificationService
 
     public function execute(CreateNotificationRequest $request)
     {
-        $user = $this->user_repo->find(new UserID($request->user_id));
+        $user = $this->user_repo->find(new UserID($request->owner_id));
         
-        $notification = Notification::create($user->id, $request->content, new Detail($request->type_about, $request->id_about));
+        $notification = Notification::create($user->id, new UserID($request->poster_id), $request->content, new Detail($request->type_about, $request->id_about));
         $user->addNotification($notification);
 
         $this->user_repo->persist($user);

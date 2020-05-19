@@ -8,6 +8,7 @@ use Microblog\Core\Application\Service\CreateNotificationService;
 use Microblog\Core\Domain\Event\PostCreated;
 use Microblog\Core\Domain\Event\UserFollowed;
 use Microblog\Core\Domain\Interfaces\IUserRepository;
+use Microblog\Core\Domain\Model\User\UserID;
 
 class NotificationEventSubscriber implements DomainEventSubscriber
 {
@@ -38,9 +39,11 @@ class NotificationEventSubscriber implements DomainEventSubscriber
                 /** @var PostCreated $aDomainEvent */
                 foreach ($aDomainEvent->post->mentions as $username) {
                     $user = $this->user_repo->findByUsername($username);
+                    $poster = $this->user_repo->find($aDomainEvent->post->poster_id);
                     $request = new CreateNotificationRequest;
-                    $request->user_id = $user->id->getString();
-                    $request->content = 'Anda di-mention oleh @' . $username->getString();
+                    $request->owner_id = $user->id->getString();
+                    $request->poster_id = $aDomainEvent->post->poster_id->getString();
+                    $request->content = 'Anda di-mention oleh @' . $poster->username->getString();
                     $request->type_about = 'post';
                     $request->id_about = $aDomainEvent->post->id->getString();
                     $this->service->execute($request);
@@ -52,7 +55,7 @@ class NotificationEventSubscriber implements DomainEventSubscriber
                 /** @var UserFollowed $aDomainEvent */
                 $user = $this->user_repo->find($aDomainEvent->user_id);
                 $request = new CreateNotificationRequest;
-                $request->user_id = $aDomainEvent->user_id->getString();
+                $request->owner_id = $aDomainEvent->user_id->getString();
                 $request->content = 'Anda di-follow oleh @' . $username->getString();
                 $request->type_about = 'user';
                 $request->id_about = $user->username->getString();
