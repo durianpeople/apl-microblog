@@ -5,6 +5,7 @@ namespace Microblog\Core\Domain\Interfaces;
 use Microblog\Core\Domain\Model\Post\Post;
 use Microblog\Core\Domain\Model\Post\PostID;
 use Microblog\Core\Domain\Model\Post\Hashtag;
+use Microblog\Core\Domain\Model\User\UserID;
 
 interface IPostRepository
 {
@@ -22,6 +23,11 @@ interface IPostRepository
      * @return Post[]
      */
     public function getPostsByHastag(Hashtag $hashtag): array;
+    /**
+     * @param UserID $user_id
+     * @return Post[]
+     */
+    public function getPostsByUserID(UserID $user_id): array;
     public function persist(Post $tweet);
     public function delete(Post $tweet);
 }
