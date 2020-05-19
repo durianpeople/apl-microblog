@@ -15,7 +15,7 @@ class RegisterService
         $this->user_repo = $user_repo;
     }
 
-    public function execute(RegisterRequest $request): bool
+    public function execute(RegisterRequest $request)
     {
         $user = User::create($request->username, $request->password);
 

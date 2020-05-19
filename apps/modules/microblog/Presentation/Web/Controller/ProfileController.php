@@ -8,7 +8,10 @@ class ProfileController extends Controller
 {
     public function indexAction()
     {
-        $this->view->setVar('test_var', "This is set var from controller");
+        if (!$this->session->has('user_info')) {
+            return $this->response->redirect('/login');
+        }
+        $this->view->setVar('user_info', $this->session->get('user_info'));
         $this->view->pick('profile/index');
     }
 }
