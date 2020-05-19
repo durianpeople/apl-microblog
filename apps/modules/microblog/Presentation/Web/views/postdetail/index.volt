@@ -10,7 +10,7 @@
               <img src="{{ url('images/tes.jpg') }}" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
             </div>
             <div class="col s10">
-                <h5 class="title">{{post.username}}</h5>
+                <h5 class="title"><a href="/user/{{post.user_id}}">{{post.username}}</a></h5>
                 <p>{{post.content}}</p>
                 <div class="col s1">
                     <a href="/post/like/{{post.id}}"><i class="fas fa-heart"></i> {{post.likes_count}}</a>

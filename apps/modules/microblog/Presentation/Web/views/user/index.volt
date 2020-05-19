@@ -10,16 +10,14 @@
               <a href="/unfollow/{{complete_user_info.id}}" class="btn blue">Unfollow</a>
             </div>
             <div class="col s12 m6">
-              <span class="card-title">_defunction
-                <br><small><a href="#">@{{complete_user_info.username}}</a></small>
+              <span class="card-title"><a href="#">@{{complete_user_info.username}}</a>
               </span>
               <div>
-              <p>⏳on hiatus 🙂beautiful mind 🍝fried noodles |
-                my twitter doesn't define me at all</p>
+              
               </div>
               <br>
                 <div>
-                  East Java, Indonesialetterboxd.com/ranggakd/Born 1999Joined February 2012
+                  
                 </div>
                 <div>
                   {{complete_user_info.following_count}} Following {{complete_user_info.follower_count}} Followers

@@ -38,10 +38,10 @@ class NotificationEventSubscriber implements DomainEventSubscriber
             case $aDomainEvent instanceof PostCreated:
                 /** @var PostCreated $aDomainEvent */
                 foreach ($aDomainEvent->post->mentions as $username) {
-                    $user = $this->user_repo->findByUsername($username);
+                    $followee = $this->user_repo->findByUsername($username);
                     $poster = $this->user_repo->find($aDomainEvent->post->poster_id);
                     $request = new CreateNotificationRequest;
-                    $request->owner_id = $user->id->getString();
+                    $request->owner_id = $followee->id->getString();
                     $request->poster_id = $aDomainEvent->post->poster_id->getString();
                     $request->content = 'Anda di-mention oleh @' . $poster->username->getString();
                     $request->type_about = 'post';
@@ -53,12 +53,14 @@ class NotificationEventSubscriber implements DomainEventSubscriber
 
             case $aDomainEvent instanceof UserFollowed:
                 /** @var UserFollowed $aDomainEvent */
-                $user = $this->user_repo->find($aDomainEvent->user_id);
+                $followee = $this->user_repo->find($aDomainEvent->followee_id);
+                $follower = $this->user_repo->find($aDomainEvent->follower_id);
                 $request = new CreateNotificationRequest;
-                $request->owner_id = $aDomainEvent->user_id->getString();
-                $request->content = 'Anda di-follow oleh @' . $username->getString();
+                $request->owner_id = $aDomainEvent->followee_id->getString();
+                $request->poster_id = $aDomainEvent->follower_id->getString();
+                $request->content = 'Anda di-follow oleh @' . $follower->username->getString();
                 $request->type_about = 'user';
-                $request->id_about = $user->username->getString();
+                $request->id_about = $follower->id->getString();
                 $this->service->execute($request);
         }
     }

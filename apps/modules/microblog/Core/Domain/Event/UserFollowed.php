@@ -7,16 +7,19 @@ use DateTimeImmutable;
 use Microblog\Core\Domain\Model\User\UserID;
 
 /**
- * @property-read UserID $user_id
+ * @property-read UserID $followee_id
+ * @property-read UserID $follower_id
  */
 class UserFollowed implements DomainEvent
 {
     protected DateTimeImmutable $occuredOn;
-    protected UserID $user_id;
+    protected UserID $followee_id;
+    protected UserID $follower_id;
 
-    public function __construct(UserID $user_id)
+    public function __construct(UserID $followee, UserID $follower)
     {
-        $this->user_id = $user_id;
+        $this->followee_id = $followee;
+        $this->follower_id = $follower;
         $this->occuredOn = new DateTimeImmutable();
     }
 
@@ -28,8 +31,10 @@ class UserFollowed implements DomainEvent
     public function __get($name)
     {
         switch ($name) {
-            case 'user_id':
-                return $this->user_id;
+            case 'followee_id':
+                return $this->followee_id;
+            case 'follower_id':
+                return $this->follower_id;
         }
     }
 }
