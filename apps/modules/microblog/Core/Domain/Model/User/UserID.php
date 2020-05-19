@@ -2,10 +2,11 @@
 
 namespace Microblog\Core\Domain\Model\User;
 
+use Common\Interfaces\EqualityComparable;
 use Microblog\Core\Domain\Exception\UuidAssertionError;
 use Ramsey\Uuid\Uuid;
 
-class UserID
+class UserID implements EqualityComparable
 {
     protected string $guid;
 
@@ -23,5 +24,13 @@ class UserID
     public function getString(): string
     {
         return $this->guid;
+    }
+
+    public function equals($other_object): bool
+    {
+        if ($other_object instanceof UserID) {
+            return $this->getString() === $other_object->getString();
+        }
+        return false;
     }
 }

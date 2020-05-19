@@ -16,6 +16,7 @@ $loader->registerNamespaces([
 
 	'Common\Interfaces' => APP_PATH . '/common/Interfaces',
 	'Common\Structure' => APP_PATH . '/common/Structure',
+	'Common\Utility' => APP_PATH . '/common/Utility',
 
 ]);
 

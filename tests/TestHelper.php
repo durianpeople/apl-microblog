@@ -1,5 +1,9 @@
 <?php
 
+use Microblog\Infrastructure\Persistence\Repository\PostRepository;
+use Microblog\Infrastructure\Persistence\Repository\UserRepository;
+use Phalcon\Di;
+use Phalcon\Di\FactoryDefault;
 use Phalcon\Loader;
 
 ini_set("display_errors", 1);
@@ -28,16 +32,45 @@ $loader->registerDirs(
 );
 
 $loader->registerNamespaces([
-    'Microblog\Core\Domain\Model\User' => APP_PATH . '/modules/microblog/Core/Domain/Model/User',
+    'Common\Interfaces' => APP_PATH . '/common/Interfaces',
+    'Common\Structure' => APP_PATH . '/common/Structure',
+    'Common\Utility' => APP_PATH . '/common/Utility',
+
     'Microblog\Core\Domain\Exception' => APP_PATH . '/modules/microblog/Core/Domain/Exception',
+    'Microblog\Core\Domain\Model\User' => APP_PATH . '/modules/microblog/Core/Domain/Model/User',
+    'Microblog\Core\Domain\Model\Post' => APP_PATH . '/modules/microblog/Core/Domain/Model/Post',
+    'Microblog\Core\Domain\Model\Notification' => APP_PATH . '/modules/microblog/Core/Domain/Model/Notification',
+    'Microblog\Core\Domain\Interfaces' => APP_PATH . '/modules/microblog/Core/Domain/Interfaces',
+
+    'Microblog\Infrastructure\Persistence\Mapper' => APP_PATH . '/modules/microblog/Infrastructure/Persistence/Mapper',
+    'Microblog\Infrastructure\Persistence\Repository' => APP_PATH . '/modules/microblog/Infrastructure/Persistence/Repository',
+    'Microblog\Infrastructure\Persistence\Record' => APP_PATH . '/modules/microblog/Infrastructure/Persistence/Record',
 ]);
 
 $loader->register();
 
-// $di = new FactoryDefault();
+$di = new FactoryDefault();
 
-// Di::reset();
+Di::reset();
 
 // // Add any needed services to the DI here
 
-// Di::setDefault($di);
+$di->set('db', function () {
+    $adapter = Phalcon\Db\Adapter\Pdo\Mysql::class;
+    return new $adapter([
+        'host'     => 'localhost',
+        'username' => 'root',
+        'password' => '',
+        'dbname'   => 'apl_microblog',
+    ]);
+});
+
+$di->set('postRepository', function() use ($di) {
+    return new PostRepository($di);
+});
+
+$di->set('userRepository', function() use ($di) {
+    return new UserRepository($di);
+});
+
+Di::setDefault($di);
