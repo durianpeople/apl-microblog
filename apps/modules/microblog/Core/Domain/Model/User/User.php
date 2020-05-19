@@ -14,6 +14,8 @@ use Microblog\Core\Domain\Exception\WrongWatchableList;
  * @property-read int $follower_count
  * @property-read UserID[] $added_followings
  * @property-read UserID[] $removed_followings
+ * @property-read Notification[] $current_notifications
+ * @property-read Notification[] $added_notifications
  */
 class User
 {
@@ -30,7 +32,7 @@ class User
         return new User(UserID::generate(), new Username($username), Password::createFromString($password), 0, 0);
     }
 
-    public function __construct(UserID $id, Username $username, Password $password, int $following_count, int $follower_count, WatchableList $notifications = null)
+    public function __construct(UserID $id, Username $username, Password $password, int $following_count, int $follower_count)
     {
         $this->id = $id;
         $this->username = $username;
@@ -39,13 +41,7 @@ class User
         $this->follower_count = $follower_count;
 
         $this->following = new WatchableList(UserID::class);
-
-        if ($notifications == null)
-            $this->notifications = new WatchableList(Notification::class);
-        else {
-            assert($notifications->getWatchedClass() == Notification::class, new WrongWatchableList);
-            $this->notifications = $notifications;
-        }
+        $this->notifications = new WatchableList(Notification::class);
     }
 
     public function __get($name)
@@ -65,6 +61,10 @@ class User
                 return $this->following->getAddedItems();
             case 'removed_followings':
                 return $this->following->getRemovedItems();
+            case 'current_notifications':
+                return $this->notifications->getCurrentItems();
+            case 'added_notifications':
+                return $this->notifications->getAddedItems();
         }
     }
 

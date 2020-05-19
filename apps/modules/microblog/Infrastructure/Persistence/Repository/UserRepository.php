@@ -35,6 +35,11 @@ class UserRepository implements IUserRepository
         return UserMapper::toModel($user_record);
     }
 
+    public function populateNotifications(User $user)
+    {
+        
+    }
+
     public function persist(User $user)
     {
         TrxClosure::execute(function () use ($user) {
