@@ -17,7 +17,7 @@ class EditUserService
         $this->user_repo = $user_repo;
     }
 
-    public function execute(EditUserRequest $request): bool
+    public function execute(EditUserRequest $request)
     {
         $user = $this->user_repo->find(new UserID($request->user_id));
 
