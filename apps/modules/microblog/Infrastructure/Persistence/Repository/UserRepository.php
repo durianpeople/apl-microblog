@@ -6,6 +6,7 @@ use Common\Structure\WatchableList;
 use Common\Utility\TrxClosure;
 use DateTime;
 use Microblog\Core\Domain\Exception\NotFoundException;
+use Microblog\Core\Domain\Exception\WrongPasswordException;
 use Microblog\Core\Domain\Interfaces\IUserRepository;
 use Microblog\Core\Domain\Model\User\Detail;
 use Microblog\Core\Domain\Model\User\Notification;
@@ -40,6 +41,22 @@ class UserRepository implements IUserRepository
             throw new NotFoundException;
 
         return UserMapper::toModel($user_record);
+    }
+
+    public function findByUserPass(string $username, string $password): User
+    {
+        /** @var UserRecord */
+        $user_record = UserRecord::findFirst([
+            'conditions' => 'username = :username:',
+            'bind' => [
+                'username' => $username
+            ]
+        ]);
+        if (!$user_record) throw new NotFoundException;
+
+        $user = UserMapper::toModel($user_record);
+        if (!$user->password->testAgainst($password)) throw new WrongPasswordException;
+        return $user;
     }
 
     public function populateNotifications(User &$user)
