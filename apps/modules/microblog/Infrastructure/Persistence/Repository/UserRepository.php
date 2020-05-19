@@ -65,7 +65,7 @@ class UserRepository implements IUserRepository
         $user_record = UserRecord::findFirst([
             'conditions' => 'username = :username:',
             'bind' => [
-                'username' => $username
+                'username' => $username->getString()
             ]
         ]);
 
