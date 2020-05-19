@@ -1,5 +1,9 @@
 <?php
 
+use Microblog\Core\Application\Service\LoginService;
+use Microblog\Core\Application\Service\RegisterService;
+use Microblog\Infrastructure\Persistence\Repository\PostRepository;
+use Microblog\Infrastructure\Persistence\Repository\UserRepository;
 use Phalcon\Di\DiInterface;
 use Phalcon\Mvc\View;
 
@@ -27,3 +31,24 @@ $di->set('db', function () {
         'dbname'   => getenv('DB_NAME'),
     ]);
 });
+
+#region Repositories
+$di->set('userRepository', function() use ($di){
+    return new UserRepository($di);
+});
+
+$di->set('postRepository', function() use ($di){
+    return new PostRepository($di);
+});
+#endregion
+
+
+#region Application Services
+$di->set('loginService', function() use ($di) {
+    return new LoginService($di->get('userRepository'));
+});
+
+$di->set('registerService', function() use ($di) {
+    return new RegisterService($di->get('userRepository'));
+});
+#endregion
