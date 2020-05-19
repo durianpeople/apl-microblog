@@ -15,6 +15,8 @@ use Microblog\Core\Application\Service\UnLikePostService;
 use Microblog\Core\Application\Service\DeletePostService;
 use Microblog\Core\Application\Service\ViewAllNotificationService;
 use Microblog\Core\Application\Service\ViewPostService;
+use Microblog\Core\Application\Service\EditUserService;
+use Microblog\Core\Application\Service\ViewUserInfoService;
 use Microblog\Infrastructure\Persistence\Repository\PostRepository;
 use Microblog\Infrastructure\Persistence\Repository\UserRepository;
 use Phalcon\Di\DiInterface;
@@ -99,6 +101,13 @@ $di->set('listAllHashtagService', function() use ($di){
 $di->set('listAllPostsByHashtagService', function() use ($di){
     return new ListAllPostsByHashtagService($di->get('postRepository'), $di->get('userRepository'));
 });
+
+$di->set('editUserService', function() use ($di){
+    return new EditUserService($di->get('userRepository'));
+});
+
+$di->set('viewUserInfoService', function() use ($di){
+    return new ViewUserInfoService($di->get('userRepository'));
 
 $di->set('viewAllNotificationService', function() use ($di){
     return new ViewAllNotificationService($di->get('userRepository'));

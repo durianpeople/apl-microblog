@@ -48,6 +48,11 @@ $router->add('/h/{hashtag}', array_merge($mod_config, [
     'action' => 'index'
 ]));
 
+$router->add('/user/{id}', array_merge($mod_config, [
+    'controller' => 'user',
+    'action' => 'index'
+]));
+
 $router->add('/post/{id}', array_merge($mod_config, [
     'controller' => 'postdetail',
     'action' => 'index'
