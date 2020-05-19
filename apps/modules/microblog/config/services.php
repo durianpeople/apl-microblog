@@ -131,6 +131,7 @@ $di->set('followUserService', function() use ($di){
 
 $di->set('unfollowUserService', function() use ($di){
     return new UnfollowUserService($di->get('userRepository'));
+});
   
 $di->set('markAllNotificationsAsReadService', function() use ($di){
     return new MarkAllNotificationsAsReadService($di->get('userRepository'));
