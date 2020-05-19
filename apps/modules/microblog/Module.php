@@ -16,6 +16,7 @@ class Module implements ModuleDefinitionInterface
 
             'Microblog\Core\Domain\Interfaces' => __DIR__ . '/Core/Domain/Interfaces',
             'Microblog\Core\Domain\Event' => __DIR__ . '/Core/Domain/Event',
+            'Microblog\Core\Domain\Exception' => __DIR__ . '/Core/Domain/Exception',
 
             'Microblog\Core\Domain\Model' => __DIR__ . '/Core/Domain/Model',
             
@@ -31,6 +32,7 @@ class Module implements ModuleDefinitionInterface
 
             'Microblog\Infrastructure\Persistence\Repository' => __DIR__ . '/Infrastructure/Persistence/Repository',
             'Microblog\Infrastructure\Persistence\Record' => __DIR__ . '/Infrastructure/Persistence/Record',
+            'Microblog\Infrastructure\Persistence\Mapper' => __DIR__ . '/Infrastructure/Persistence/Mapper',
 
             'Microblog\Presentation\Web\Controller' => __DIR__ . '/Presentation/Web/Controller',
             'Microblog\Presentation\Web\Validator' => __DIR__ . '/Presentation/Web/Validator',
