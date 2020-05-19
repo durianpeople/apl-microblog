@@ -13,6 +13,7 @@ use Microblog\Core\Domain\Model\User\Notification;
 use Microblog\Core\Domain\Model\User\NotificationID;
 use Microblog\Core\Domain\Model\User\User;
 use Microblog\Core\Domain\Model\User\UserID;
+use Microblog\Core\Domain\Model\User\Username;
 use Microblog\Infrastructure\Persistence\Mapper\UserMapper;
 use Microblog\Infrastructure\Persistence\Record\NotificationRecord;
 use Microblog\Infrastructure\Persistence\Record\UserRecord;
@@ -57,6 +58,20 @@ class UserRepository implements IUserRepository
         $user = UserMapper::toModel($user_record);
         if (!$user->password->testAgainst($password)) throw new WrongPasswordException;
         return $user;
+    }
+
+    public function findByUsername(Username $username): User
+    {
+        $user_record = UserRecord::findFirst([
+            'conditions' => 'username = :username:',
+            'bind' => [
+                'username' => $username
+            ]
+        ]);
+
+        if (!$user_record) throw new NotFoundException;
+
+        return UserMapper::toModel($user_record);
     }
 
     public function populateNotifications(User &$user)

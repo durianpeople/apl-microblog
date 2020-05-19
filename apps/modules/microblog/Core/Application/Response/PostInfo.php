@@ -9,16 +9,20 @@ class PostInfo
 {
     public string $id;
     public string $created_at;
-    public string $user_id; // TODO: expand ke info user? mungkin butuh nyimpen objek User di Post
+    public string $user_id;
+    public string $username;
     public string $content;
     public int $likes_count;
 
-    public static function create(Post $post)
+    public static function create(Post $post, string $username)
     {
-        $this->id = $post->id->getString();
-        $this->created_at = $post->created_at->format("Y-m-d H:i:s");
-        $this->user_id = $post->poster_id->getString();
-        $this->content = $post->content;
-        $this->likes_count = $post->likes_count;
+        $pi = new PostInfo;
+        $pi->id = $post->id->getString();
+        $pi->created_at = $post->created_at->format("Y-m-d H:i:s");
+        $pi->user_id = $post->poster_id->getString();
+        $pi->username = $username;
+        $pi->content = $post->content;
+        $pi->likes_count = $post->likes_count;
+        return $pi;
     }
 }

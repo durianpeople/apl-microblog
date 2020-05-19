@@ -3,6 +3,8 @@
 namespace Microblog\Core\Domain\Model\User;
 
 use Common\Structure\WatchableList;
+use Common\Utility\DomainEventPublisher;
+use Microblog\Core\Domain\Event\UserFollowed;
 use Microblog\Core\Domain\Exception\WrongPasswordException;
 use Microblog\Core\Domain\Exception\WrongWatchableList;
 
@@ -12,6 +14,7 @@ use Microblog\Core\Domain\Exception\WrongWatchableList;
  * @property-read Password $password
  * @property-read int $following_count
  * @property-read int $follower_count
+ * @property-read UserID[] $current_followings
  * @property-read UserID[] $added_followings
  * @property-read UserID[] $removed_followings
  * @property-read Notification[] $current_notifications
@@ -33,7 +36,7 @@ class User
         return new User(UserID::generate(), new Username($username), Password::createFromString($password), 0, 0);
     }
 
-    public function __construct(UserID $id, Username $username, Password $password, int $following_count, int $follower_count)
+    public function __construct(UserID $id, Username $username, Password $password, int $following_count, int $follower_count, WatchableList $following = null)
     {
         $this->id = $id;
         $this->username = $username;
@@ -41,7 +44,12 @@ class User
         $this->following_count = $following_count;
         $this->follower_count = $follower_count;
 
-        $this->following = new WatchableList(UserID::class);
+        if ($following == null)
+            $this->following = new WatchableList(UserID::class);
+        else {
+            assert($following->getWatchedClass() == UserID::class, new \Exception("folowng"));
+            $this->following = $following;
+        }
         $this->notifications = new WatchableList(Notification::class);
     }
 
@@ -58,6 +66,8 @@ class User
                 return $this->following_count;
             case 'follower_count':
                 return $this->follower_count;
+            case 'current_followings':
+                return $this->following->getCurrentItems();
             case 'added_followings':
                 return $this->following->getAddedItems();
             case 'removed_followings':
@@ -86,6 +96,7 @@ class User
     public function follow(User $user)
     {
         $this->following->add($user->id);
+        DomainEventPublisher::instance()->publish(new UserFollowed($user->id));
     }
 
     public function unfollow(User $user)

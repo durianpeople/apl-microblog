@@ -23,6 +23,11 @@ $router->add('/login', array_merge($mod_config, [
     'action' => 'index'
 ]));
 
+$router->add('/logout', array_merge($mod_config, [
+    'controller' => 'authenticated',
+    'action' => 'logout'
+]));
+
 $router->add('/profile', array_merge($mod_config, [
     'controller' => 'profile',
     'action' => 'index'
@@ -46,4 +51,14 @@ $router->add('/h/{hashtag}', array_merge($mod_config, [
 $router->add('/post/{id}', array_merge($mod_config, [
     'controller' => 'postdetail',
     'action' => 'index'
+]));
+
+$router->add('/post/like/{id}', array_merge($mod_config, [
+    'controller' => 'postdetail',
+    'action' => 'like'
+]));
+
+$router->add('/post/unlike/{id}', array_merge($mod_config, [
+    'controller' => 'postdetail',
+    'action' => 'unlike'
 ]));

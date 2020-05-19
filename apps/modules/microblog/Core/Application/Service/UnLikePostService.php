@@ -3,6 +3,7 @@
 namespace Microblog\Core\Application\Service;
 
 use Microblog\Core\Application\Request\LikePostRequest;
+use Microblog\Core\Application\Request\UnLikePostRequest;
 use Microblog\Core\Domain\Interfaces\IPostRepository;
 use Microblog\Core\Domain\Model\Post\PostID;
 use Microblog\Core\Domain\Model\User\UserID;
@@ -16,7 +17,7 @@ class UnLikePostService
         $this->post_repo = $post_repo;
     }
 
-    public function execute(UnLikePostService $request)
+    public function execute(UnLikePostRequest $request)
     {
         $post = $this->post_repo->find(new PostID($request->post_id));
         $post->removeLike(new UserID($request->user_id));
