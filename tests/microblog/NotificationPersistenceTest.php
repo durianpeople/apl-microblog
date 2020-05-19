@@ -27,7 +27,7 @@ class NotificationPersistenceTest extends TestCase
     public function testCanBePersistedRetrievedAndDeleted()
     {
         $user = self::$user_repo->find(new UserID('e9d235aa-a7c0-4887-9e16-45af0d213cf4'));
-        $notification = Notification::create($user->id, 'Test notification', new Detail('test', '123'));
+        $notification = Notification::create($user->id, UserID::generate(), 'Test notification', new Detail('test', '123'));
         $user->addNotification($notification);
         self::$user_repo->persist($user);
 

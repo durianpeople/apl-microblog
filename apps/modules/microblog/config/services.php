@@ -4,11 +4,13 @@ use Common\Utility\DomainEventPublisher;
 use Microblog\Core\Application\EventSubscriber\NotificationEventSubscriber;
 use Microblog\Core\Application\Service\CreateNotificationService;
 use Microblog\Core\Application\Service\CreatePostService;
+use Microblog\Core\Application\Service\DeleteNotificationService;
 use Microblog\Core\Application\Service\LikePostService;
 use Microblog\Core\Application\Service\ListAllHashtagService;
 use Microblog\Core\Application\Service\ListAllPostByUserIDService;
 use Microblog\Core\Application\Service\ListAllPostsByHashtagService;
 use Microblog\Core\Application\Service\LoginService;
+use Microblog\Core\Application\Service\MarkAllNotificationsAsReadService;
 use Microblog\Core\Application\Service\MarkNotificationAsReadService;
 use Microblog\Core\Application\Service\RegisterService;
 use Microblog\Core\Application\Service\UnLikePostService;
@@ -122,12 +124,20 @@ $di->set('markNotificationAsReadService', function() use ($di){
 
 });
 
+
 $di->set('followUserService', function() use ($di){
     return new FollowUserService($di->get('userRepository'));
 });
 
 $di->set('unfollowUserService', function() use ($di){
     return new UnfollowUserService($di->get('userRepository'));
+  
+$di->set('markAllNotificationsAsReadService', function() use ($di){
+    return new MarkAllNotificationsAsReadService($di->get('userRepository'));
+});
+
+$di->set('deleteNotificationService', function() use ($di){
+    return new DeleteNotificationService($di->get('userRepository'));
 });
 
 #endregion

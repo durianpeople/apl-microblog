@@ -28,7 +28,8 @@ class ViewAllNotificationService
         $notification_infos = [];
         foreach ($user->current_notifications as $n)
         {
-            $notification_infos[] = new NotificationInfo($n, $user->username->getString());
+            $poster = $this->user_repo->find($n->poster_id);
+            $notification_infos[] = new NotificationInfo($n, $poster->username->getString());
         }
         usort($notification_infos, function($a, $b) {
             return -1 * strcmp($a->created_at, $b->created_at);

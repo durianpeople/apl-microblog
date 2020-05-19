@@ -1,7 +1,6 @@
 <?php
 
 namespace Microblog\Presentation\Web\Controller;
-
 use Microblog\Core\Application\Request\ViewUserInfoRequest;
 use Microblog\Core\Application\Service\ViewUserInfoService;
 use Phalcon\Mvc\Controller;
