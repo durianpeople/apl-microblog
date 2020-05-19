@@ -9,6 +9,7 @@ use Microblog\Core\Application\Service\ListAllPostByUserIDService;
 use Microblog\Core\Application\Service\LoginService;
 use Microblog\Core\Application\Service\RegisterService;
 use Microblog\Core\Application\Service\UnLikePostService;
+use Microblog\Core\Application\Service\DeletePostService;
 use Microblog\Core\Application\Service\ViewPostService;
 use Microblog\Infrastructure\Persistence\Repository\PostRepository;
 use Microblog\Infrastructure\Persistence\Repository\UserRepository;
@@ -82,6 +83,10 @@ $di->set('likePostService', function() use ($di){
 
 $di->set('unlikePostService', function() use ($di){
     return new UnLikePostService($di->get('postRepository'));
+});
+
+$di->set('deletePostService', function() use ($di){
+    return new DeletePostService($di->get('postRepository'));
 });
 #endregion
 
