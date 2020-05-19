@@ -10,20 +10,24 @@
             </div>
             <form action="/profile" method="post">
               <div class="input-field col s12">
+                <input placeholder="User id" id="username" type="text" class="validate" name="user_id" value='{{user_info.id}}'>
+                <label for="user_id">User ID</label>
+              </div>
+              <div class="input-field col s12">
                 <input placeholder="Username" id="username" type="text" class="validate" name="username" value='{{user_info.username}}'>
                 <label for="username">Username</label>
               </div>
               <div class="input-field col s12">
-                <input placeholder="Old Pasword..." id="oldpassword" type="password" class ="validate" name="oldpassword">
-                <label for="oldpassword">Old Password</label>
+                <input placeholder="Old Pasword..." id="oldpassword" type="password" class ="validate" name="old_password">
+                <label for="old_password">Old Password</label>
               </div>
               <div class="input-field col s12">
-                <input placeholder="Pasword..." id="newpassword" type="password" class ="validate" name="newpassword">
-                <label for="newpassword">New Password</label>
+                <input placeholder="Pasword..." id="newpassword" type="password" class ="validate" name="new_password">
+                <label for="new_password">New Password</label>
               </div>
               <div class="input-field col s12">
-                <input placeholder="Re-type Pasword..." id="newpassword2" type="password" class ="validate" name="newpassword2">
-                <label for="newpassword2">Retype Password</label>
+                <input placeholder="Re-type Pasword..." id="newpassword2" type="password" class ="validate" name="new_password2">
+                <label for="new_password2">Retype Password</label>
               </div>
               <div class="col s12" >
                 <!-- <a href="#" class="btn blue" type="submit" style="width:100%">Register</a> -->
