@@ -24,7 +24,7 @@ class ProfileController extends AuthenticatedController
             $request->$old_password = $this->request->getPost('old_password');
             $request->$new_password = $this->request->getPost('new_password');
             $this->edit_user_service->execute($request);
-            $this->response->redirect('/profile');
+            return $this->response->redirect('/profile');
         }
 
         $this->view->setVar('user_info', $this->session->get('user_info'));
