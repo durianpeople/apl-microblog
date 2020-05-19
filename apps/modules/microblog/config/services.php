@@ -95,6 +95,7 @@ $di->set('unlikePostService', function() use ($di){
 
 $di->set('deletePostService', function() use ($di){
     return new DeletePostService($di->get('postRepository'));
+});
 
 $di->set('listAllHashtagService', function() use ($di){
     return new ListAllHashtagService($di->get('postRepository'));
@@ -110,6 +111,7 @@ $di->set('editUserService', function() use ($di){
 
 $di->set('viewUserInfoService', function() use ($di){
     return new ViewUserInfoService($di->get('userRepository'));
+});
 
 $di->set('viewAllNotificationService', function() use ($di){
     return new ViewAllNotificationService($di->get('userRepository'));
