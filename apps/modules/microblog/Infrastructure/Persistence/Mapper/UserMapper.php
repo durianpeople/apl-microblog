@@ -2,6 +2,7 @@
 
 namespace Microblog\Infrastructure\Persistence\Mapper;
 
+use Common\Structure\WatchableList;
 use Microblog\Core\Domain\Model\User\Password;
 use Microblog\Core\Domain\Model\User\User;
 use Microblog\Core\Domain\Model\User\UserID;
@@ -115,12 +116,22 @@ class UserMapper
 
     public static function toModel(UserRecord $user_record): User
     {
+        $user_ids = [];
+        foreach ($user_record->following as $fr) {
+            /** @var FollowingRecord $fr */
+            $user_ids[] = new UserID($fr->followee_id);
+        }
+
+        $watchable = new WatchableList(UserID::class);
+        $watchable->initializeItems($user_ids);
+
         return new User(
             new UserID($user_record->id),
             new Username($user_record->username),
             new Password($user_record->password_hash),
             $user_record->following->count(),
-            $user_record->follower->count()
+            $user_record->follower->count(),
+            $watchable
         );
     }
 }

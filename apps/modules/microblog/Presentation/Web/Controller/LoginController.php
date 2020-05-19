@@ -24,7 +24,7 @@ class LoginController extends Controller
 
             $user_info = $this->login_service->execute($request);
             $this->session->set('user_info', $user_info);
-            $this->response->redirect('/profile');
+            $this->response->redirect('/');
         }
         $this->view->setVar('test_var', "This is set var from controller");
         $this->view->pick('login/index');

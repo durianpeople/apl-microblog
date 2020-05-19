@@ -12,9 +12,9 @@
                     <div class="col s1"><img src="images/tes.jpg" alt="" class="circle responsive-img"></div>
                     <div class="col s8">
                         <label for="icon_prefix2">Tweet</label>
-                        <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+                        <textarea id="icon_prefix2" class="materialize-textarea" name="content"></textarea>
         
-                        <button class="btn waves-effect waves-light, blue" type="submit" name="action">Tweet
+                        <button class="btn waves-effect waves-light, blue" type="submit" name="action">Post
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
@@ -24,50 +24,22 @@
         </div>
 
     <!-- Post List -->
-        <a href="/post/id" class="collection-item">
+        {%for p in posts%}
+        <a href="/post/{{p.id}}" class="collection-item">
             <div class="col s12 m8 offset-m2 l6 offset-l3">
                 <div class="row valign-wrapper">
                         <div class="col s1">
                             <img src="images/tes.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
                         </div>
                         <div class="col s12">
-                            <span class="black-text">Bagas</span>
+                            <span class="black-text">{{p.username}}</span>
                             <br>
-                            <span class="black-text"> This is a square image. Add the "circle" class to it to make it appear circular.</span>
+                            <span class="black-text"> {{p.content}}</span>
                         </div>
                 </div>
             </div>
         </a>
-
-        <a href="/post/id" class="collection-item">
-            <div class="col s12 m8 offset-m2 l6 offset-l3">
-                <div class="row valign-wrapper">
-                        <div class="col s1">
-                            <img src="images/tes.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
-                        </div>
-                        <div class="col s12">
-                            <span class="black-text">Bagas</span>
-                            <br>
-                            <span class="black-text"> This is a square image. Add the "circle" class to it to make it appear circular.</span>
-                        </div>
-                </div>
-            </div>
-        </a>
-
-        <a href="/post/id" class="collection-item">
-            <div class="col s12 m8 offset-m2 l6 offset-l3">
-                <div class="row valign-wrapper">
-                        <div class="col s1">
-                            <img src="images/tes.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
-                        </div>
-                        <div class="col s12">
-                            <span class="black-text">Bagas</span>
-                            <br>
-                            <span class="black-text"> This is a square image. Add the "circle" class to it to make it appear circular.</span>
-                        </div>
-                </div>
-            </div>
-        </a>
+        {%endfor%}
         
     </div>
 </div>
