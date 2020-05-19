@@ -7,6 +7,7 @@ use Microblog\Core\Domain\Model\User\User;
 use Microblog\Core\Domain\Model\User\UserID;
 use Microblog\Core\Domain\Model\User\Username;
 use Microblog\Infrastructure\Persistence\Record\FollowingRecord;
+use Microblog\Infrastructure\Persistence\Record\NotificationRecord;
 use Microblog\Infrastructure\Persistence\Record\UserRecord;
 use ReflectionClass;
 
@@ -58,6 +59,32 @@ class UserMapper
         }
 
         return $following_records;
+    }
+
+    /**
+     * 
+     *
+     * @param User $user
+     * @return NotificationRecord[]
+     */
+    public static function toAddedNotificationsRecord(User $user): array
+    {
+        $notifications_record = [];
+
+        foreach ($user->added_notifications as $n) {
+            $nr = new NotificationRecord();
+            $nr->guid = $n->id->getGUID();
+            $nr->owner_id = $n->id->getUserID()->getString();
+            $nr->created_at = $n->created_at->format('Y-m-d H:i:s');
+            $nr->content = $n->content;
+            $nr->type_about = $n->detail->type;
+            $nr->id_about = $n->detail->id;
+            $nr->is_read = $n->is_read;
+
+            $notifications_record[] = $nr;
+        }
+
+        return $notifications_record;
     }
 
     public static function toModel(UserRecord $user_record): User

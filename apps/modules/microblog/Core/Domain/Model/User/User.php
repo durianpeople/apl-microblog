@@ -89,4 +89,9 @@ class User
     {
         $this->following->remove($user->id);
     }
+
+    public function addNotification(Notification $n)
+    {
+        $this->notifications->add($n);
+    }
 }
