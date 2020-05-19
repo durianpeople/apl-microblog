@@ -10,10 +10,6 @@
             </div>
             <form action="/profile" method="post">
               <div class="input-field col s12">
-                <input placeholder="User id" id="username" type="text" class="validate" name="user_id" value='{{user_info.id}}'>
-                <label for="user_id">User ID</label>
-              </div>
-              <div class="input-field col s12">
                 <input placeholder="Username" id="username" type="text" class="validate" name="username" value='{{user_info.username}}'>
                 <label for="username">Username</label>
               </div>

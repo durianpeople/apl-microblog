@@ -19,7 +19,7 @@ class ProfileController extends AuthenticatedController
     {   
         if ($this->request->isPost()){
             $request = new EditUserRequest;
-            $request->user_id = $this->request->getPost('user_id');
+            $request->user_id = $this->session->get('user_info')->id;
             $request->username = $this->request->getPost('username');
             $request->$old_password = $this->request->getPost('old_password');
             $request->$new_password = $this->request->getPost('new_password');
