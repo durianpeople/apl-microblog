@@ -1,6 +1,6 @@
 <?php
 
-namespace Microblog\Core\Domain\Model\Notification;
+namespace Microblog\Core\Domain\Model\User;
 
 /**
  * @property-read string $type

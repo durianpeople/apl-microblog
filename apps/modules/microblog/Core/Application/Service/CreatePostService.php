@@ -5,26 +5,29 @@ namespace Microblog\Core\Application\Service;
 use Common\Utility\TrxClosure;
 use Microblog\Core\Application\Request\CreatePostRequest;
 use Microblog\Core\Domain\Interfaces\IPostRepository;
+use Microblog\Core\Domain\Interfaces\IUserRepository;
 use Microblog\Core\Domain\Model\Post\Post;
 use Microblog\Core\Domain\Model\User\UserID;
 use Phalcon\Mvc\Model\Transaction\Manager;
 
 class CreatePostService
 {
-    protected IPostRepository $repo;
+    protected IPostRepository $post_repo;
+    protected IUserRepository $user_repo;
 
-    public function __construct(IPostRepository $repo)
+    public function __construct(IPostRepository $forum_repo, IPostRepository $user_repo)
     {
-        $this->repo = $repo;
+        $this->post_repo = $forum_repo;
+        $this->user_repo = $user_repo;
     }
 
     public function execute(CreatePostRequest $request)
     {
-        $user_id = new UserID($request->user_id);
+        $user = $this->user_repo->find(new UserID($request->user_id));
 
-        TrxClosure::execute(function() use ($user_id, $request) {
-            $post = Post::create($user_id, $request->content);
-            $this->repo->persist($post);
+        TrxClosure::execute(function() use ($user, $request) {
+            $post = Post::create($user, $request->content);
+            $this->post_repo->persist($post);
         });
 
     }

@@ -4,6 +4,7 @@ namespace Microblog\Core\Domain\Model\User;
 
 use Common\Structure\WatchableList;
 use Microblog\Core\Domain\Exception\WrongPasswordException;
+use Microblog\Core\Domain\Exception\WrongWatchableList;
 
 /**
  * @property-read UserID $id
@@ -13,15 +14,19 @@ use Microblog\Core\Domain\Exception\WrongPasswordException;
  * @property-read int $follower_count
  * @property-read UserID[] $added_followings
  * @property-read UserID[] $removed_followings
+ * @property-read Notification[] $current_notifications
+ * @property-read Notification[] $added_notifications
+ * @property-read Notification[] $removed_notifications
  */
 class User
 {
     protected UserID $id;
     protected Username $username;
     protected Password $password;
-    protected int $following_count;    
+    protected int $following_count;
     protected int $follower_count;
     protected WatchableList $following;
+    protected WatchableList $notifications;
 
     public static function create(string $username, string $password): User
     {
@@ -37,6 +42,7 @@ class User
         $this->follower_count = $follower_count;
 
         $this->following = new WatchableList(UserID::class);
+        $this->notifications = new WatchableList(Notification::class);
     }
 
     public function __get($name)
@@ -56,6 +62,12 @@ class User
                 return $this->following->getAddedItems();
             case 'removed_followings':
                 return $this->following->getRemovedItems();
+            case 'current_notifications':
+                return $this->notifications->getCurrentItems();
+            case 'added_notifications':
+                return $this->notifications->getAddedItems();
+            case 'removed_notifications':
+                return $this->notifications->getRemovedItems();
         }
     }
 
@@ -67,7 +79,7 @@ class User
     public function changePassword(string $old_password, Password $new_password)
     {
         assert($this->password->testAgainst($old_password), new WrongPasswordException);
-        
+
         $this->password = $new_password;
     }
 
@@ -79,5 +91,20 @@ class User
     public function unfollow(User $user)
     {
         $this->following->remove($user->id);
+    }
+
+    public function addNotification(Notification $n)
+    {
+        $this->notifications->add($n);
+    }
+
+    public function updateNotification(Notification $n)
+    {
+        $this->notifications->update($n);
+    }
+
+    public function deleteNotification(Notification $n)
+    {
+        $this->notifications->remove($n);
     }
 }

@@ -7,6 +7,7 @@ use Phalcon\Mvc\Model;
 /**
  * @property-read FollowingRecord $following
  * @property-read FollowingRecord $follower
+ * @property-read NotificationRecord $notifications
  */
 class UserRecord extends Model
 {
@@ -34,6 +35,15 @@ class UserRecord extends Model
             'follower_id',
             [
                 'alias' => 'following'
+            ]
+        );
+
+        $this->hasMany(
+            'id',
+            NotificationRecord::class,
+            'owner_id',
+            [
+                'alias' => 'notifications'
             ]
         );
     }
