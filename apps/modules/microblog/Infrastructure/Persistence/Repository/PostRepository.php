@@ -7,6 +7,7 @@ use Microblog\Core\Domain\Interfaces\IPostRepository as IPostRepository;
 use Microblog\Core\Domain\Model\Post\Hashtag;
 use Microblog\Core\Domain\Model\Post\Post;
 use Microblog\Core\Domain\Model\Post\PostID;
+use Microblog\Core\Domain\Model\User\UserID;
 use Microblog\Infrastructure\Persistence\Mapper\PostMapper;
 use Microblog\Infrastructure\Persistence\Record\HashtagRecord;
 use Microblog\Infrastructure\Persistence\Record\PostRecord;
@@ -76,6 +77,24 @@ class PostRepository implements IPostRepository
 
         $posts = [];
 
+        foreach ($post_records as $pr) {
+            $posts[] = PostMapper::toModel($pr);
+        }
+
+        return $posts;
+    }
+
+    public function getPostsByUserID(UserID $user_id): array
+    {
+        $post_records = PostRecord::find([
+            'conditions' => 'poster_id = :id:',
+            'bind' => [
+                'id' => $user_id->getString()
+            ]
+        ]);
+        
+        /** @var Post[] */
+        $posts = [];
         foreach ($post_records as $pr) {
             $posts[] = PostMapper::toModel($pr);
         }

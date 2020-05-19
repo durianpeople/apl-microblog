@@ -8,6 +8,10 @@ $mod_config = [
 ];
 
 /** @var Router $router */
+$router->add('/notifikasi', array_merge($mod_config, [
+    'controller' => 'notifikasi',
+    'action' => 'index'
+]));
 
 $router->add('/register', array_merge($mod_config, [
     'controller' => 'register',
