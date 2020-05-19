@@ -36,6 +36,6 @@ class PostRecord extends Model
             [
                 'alias' => 'hashtags'
             ]
-            );
+        );
     }
 }
