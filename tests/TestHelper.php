@@ -39,7 +39,7 @@ $loader->registerNamespaces([
     'Microblog\Core\Domain\Exception' => APP_PATH . '/modules/microblog/Core/Domain/Exception',
     'Microblog\Core\Domain\Model\User' => APP_PATH . '/modules/microblog/Core/Domain/Model/User',
     'Microblog\Core\Domain\Model\Post' => APP_PATH . '/modules/microblog/Core/Domain/Model/Post',
-    'Microblog\Core\Domain\Model\Notification' => APP_PATH . '/modules/microblog/Core/Domain/Model/Notification',
+    'Microblog\Core\Domain\Model\User' => APP_PATH . '/modules/microblog/Core/Domain/Model/User',
     'Microblog\Core\Domain\Interfaces' => APP_PATH . '/modules/microblog/Core/Domain/Interfaces',
 
     'Microblog\Infrastructure\Persistence\Mapper' => APP_PATH . '/modules/microblog/Infrastructure/Persistence/Mapper',

@@ -1,7 +1,7 @@
 <?php
 
-use Microblog\Core\Domain\Model\Notification\Detail;
-use Microblog\Core\Domain\Model\Notification\Notification;
+use Microblog\Core\Domain\Model\User\Detail;
+use Microblog\Core\Domain\Model\User\Notification;
 use Microblog\Core\Domain\Model\User\UserID;
 use PHPUnit\Framework\TestCase;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Microblog\Core\Domain\Model\Notification;
+namespace Microblog\Core\Domain\Model\User;
 
 use Microblog\Core\Domain\Exception\UuidAssertionError;
 use Ramsey\Uuid\Uuid;

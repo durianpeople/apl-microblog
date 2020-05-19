@@ -1,6 +1,6 @@
 <?php
 
-namespace Microblog\Core\Domain\Model\Notification;
+namespace Microblog\Core\Domain\Model\User;
 
 use DateTime;
 use Microblog\Core\Domain\Model\User\UserID;
