@@ -2,6 +2,7 @@
 
 namespace Microblog\Core\Domain\Model\User;
 
+use Common\Interfaces\EqualityComparable;
 use DateTime;
 use Microblog\Core\Domain\Model\User\UserID;
 
@@ -13,7 +14,7 @@ use Microblog\Core\Domain\Model\User\UserID;
  * @property-read Detail $detail
  * @property-read bool $is_read
  */
-class Notification
+class Notification implements EqualityComparable
 {
     protected NotificationID $id;
     protected UserID $owner_id;
@@ -58,5 +59,13 @@ class Notification
     public function markAsRead()
     {
         $this->is_read = true;
+    }
+
+    public function equals($other_object): bool
+    {
+        if ($other_object instanceof Notification) {
+            return $this->id->getString() == $other_object->id->getString();
+        }
+        return false;
     }
 }

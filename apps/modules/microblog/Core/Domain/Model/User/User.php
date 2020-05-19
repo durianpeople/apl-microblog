@@ -4,6 +4,7 @@ namespace Microblog\Core\Domain\Model\User;
 
 use Common\Structure\WatchableList;
 use Microblog\Core\Domain\Exception\WrongPasswordException;
+use Microblog\Core\Domain\Exception\WrongWatchableList;
 
 /**
  * @property-read UserID $id
@@ -19,16 +20,17 @@ class User
     protected UserID $id;
     protected Username $username;
     protected Password $password;
-    protected int $following_count;    
+    protected int $following_count;
     protected int $follower_count;
     protected WatchableList $following;
+    protected WatchableList $notifications;
 
     public static function create(string $username, string $password): User
     {
         return new User(UserID::generate(), new Username($username), Password::createFromString($password), 0, 0);
     }
 
-    public function __construct(UserID $id, Username $username, Password $password, int $following_count, int $follower_count)
+    public function __construct(UserID $id, Username $username, Password $password, int $following_count, int $follower_count, WatchableList $notifications = null)
     {
         $this->id = $id;
         $this->username = $username;
@@ -37,6 +39,13 @@ class User
         $this->follower_count = $follower_count;
 
         $this->following = new WatchableList(UserID::class);
+
+        if ($notifications == null)
+            $this->notifications = new WatchableList(Notification::class);
+        else {
+            assert($notifications->getWatchedClass() == Notification::class, new WrongWatchableList);
+            $this->notifications = $notifications;
+        }
     }
 
     public function __get($name)
@@ -67,7 +76,7 @@ class User
     public function changePassword(string $old_password, Password $new_password)
     {
         assert($this->password->testAgainst($old_password), new WrongPasswordException);
-        
+
         $this->password = $new_password;
     }
 

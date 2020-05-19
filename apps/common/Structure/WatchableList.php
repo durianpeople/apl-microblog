@@ -32,6 +32,11 @@ class WatchableList
         $this->watched_class = $watched_class;
     }
 
+    public function getWatchedClass(): string
+    {
+        return $this->watched_class;
+    }
+
     /**
      * Optional. Initialize list with items
      *
