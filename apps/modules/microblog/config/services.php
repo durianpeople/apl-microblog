@@ -12,6 +12,7 @@ use Microblog\Core\Application\Service\LoginService;
 use Microblog\Core\Application\Service\MarkNotificationAsReadService;
 use Microblog\Core\Application\Service\RegisterService;
 use Microblog\Core\Application\Service\UnLikePostService;
+use Microblog\Core\Application\Service\DeletePostService;
 use Microblog\Core\Application\Service\ViewAllNotificationService;
 use Microblog\Core\Application\Service\ViewPostService;
 use Microblog\Core\Application\Service\EditUserService;
@@ -89,6 +90,9 @@ $di->set('likePostService', function() use ($di){
 $di->set('unlikePostService', function() use ($di){
     return new UnLikePostService($di->get('postRepository'));
 });
+
+$di->set('deletePostService', function() use ($di){
+    return new DeletePostService($di->get('postRepository'));
 
 $di->set('listAllHashtagService', function() use ($di){
     return new ListAllHashtagService($di->get('postRepository'));

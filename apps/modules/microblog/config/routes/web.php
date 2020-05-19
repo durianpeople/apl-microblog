@@ -68,7 +68,13 @@ $router->add('/post/unlike/{id}', array_merge($mod_config, [
     'action' => 'unlike'
 ]));
 
+$router->add('/post/delete/{id}', array_merge($mod_config, [
+    'controller' => 'postdetail',
+    'action' => 'delete'
+]));
+
 $router->add('/read', array_merge($mod_config, [
     'controller' => 'notifikasi',
     'action' => 'read'
 ]));
+
