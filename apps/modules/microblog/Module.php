@@ -17,9 +17,7 @@ class Module implements ModuleDefinitionInterface
             'Microblog\Core\Domain\Interfaces' => __DIR__ . '/Core/Domain/Interfaces',
             'Microblog\Core\Domain\Event' => __DIR__ . '/Core/Domain/Event',
             'Microblog\Core\Domain\Exception' => __DIR__ . '/Core/Domain/Exception',
-
             'Microblog\Core\Domain\Model' => __DIR__ . '/Core/Domain/Model',
-            
             'Microblog\Core\Domain\Service' => __DIR__ . '/Core/Domain/Service',
 
             'Microblog\Core\Application\Request' => __DIR__ . '/Core/Application/Request',
@@ -27,7 +25,7 @@ class Module implements ModuleDefinitionInterface
             'Microblog\Core\Application\Interfaces' => __DIR__ . '/Core/Application/Interfaces',
             'Microblog\Core\Application\Service' => __DIR__ . '/Core/Application/Service',
             'Microblog\Core\Application\EventSubscriber' => __DIR__ . '/Core/Application/EventSubscriber',
-
+            
             'Microblog\Core\Exception' => __DIR__ . '/Core/Exception',
 
             'Microblog\Infrastructure\Persistence\Repository' => __DIR__ . '/Infrastructure/Persistence/Repository',
