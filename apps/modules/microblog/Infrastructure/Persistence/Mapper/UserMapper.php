@@ -87,6 +87,32 @@ class UserMapper
         return $notifications_record;
     }
 
+    /**
+     * 
+     *
+     * @param User $user
+     * @return NotificationRecord[]
+     */
+    public static function toRemovedNotificationsRecord(User $user): array
+    {
+        $notifications_record = [];
+
+        foreach ($user->removed_notifications as $n) {
+            $nr = new NotificationRecord();
+            $nr->guid = $n->id->getGUID();
+            $nr->owner_id = $n->id->getUserID()->getString();
+            $nr->created_at = $n->created_at->format('Y-m-d H:i:s');
+            $nr->content = $n->content;
+            $nr->type_about = $n->detail->type;
+            $nr->id_about = $n->detail->id;
+            $nr->is_read = $n->is_read;
+
+            $notifications_record[] = $nr;
+        }
+
+        return $notifications_record;
+    }
+
     public static function toModel(UserRecord $user_record): User
     {
         return new User(

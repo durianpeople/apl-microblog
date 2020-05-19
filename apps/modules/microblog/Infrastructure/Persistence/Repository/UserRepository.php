@@ -90,6 +90,12 @@ class UserRepository implements IUserRepository
                 $an->save();
                 false;
             }
+
+            $removed_notifications = UserMapper::toRemovedNotificationsRecord($user);
+            foreach ($removed_notifications as $rn) {
+                $rn->delete();
+                false;
+            }
         });
     }
 

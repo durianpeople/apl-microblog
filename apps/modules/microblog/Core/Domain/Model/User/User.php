@@ -16,6 +16,7 @@ use Microblog\Core\Domain\Exception\WrongWatchableList;
  * @property-read UserID[] $removed_followings
  * @property-read Notification[] $current_notifications
  * @property-read Notification[] $added_notifications
+ * @property-read Notification[] $removed_notifications
  */
 class User
 {
@@ -65,6 +66,8 @@ class User
                 return $this->notifications->getCurrentItems();
             case 'added_notifications':
                 return $this->notifications->getAddedItems();
+            case 'removed_notifications':
+                return $this->notifications->getRemovedItems();
         }
     }
 
@@ -98,5 +101,10 @@ class User
     public function updateNotification(Notification $n)
     {
         $this->notifications->update($n);
+    }
+
+    public function deleteNotification(Notification $n)
+    {
+        $this->notifications->remove($n);
     }
 }
