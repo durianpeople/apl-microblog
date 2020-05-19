@@ -3,6 +3,8 @@
 namespace Microblog\Core\Domain\Model\User;
 
 use Common\Structure\WatchableList;
+use Common\Utility\DomainEventPublisher;
+use Microblog\Core\Domain\Event\UserFollowed;
 use Microblog\Core\Domain\Exception\WrongPasswordException;
 use Microblog\Core\Domain\Exception\WrongWatchableList;
 
@@ -86,6 +88,7 @@ class User
     public function follow(User $user)
     {
         $this->following->add($user->id);
+        DomainEventPublisher::instance()->publish(new UserFollowed($user->id));
     }
 
     public function unfollow(User $user)

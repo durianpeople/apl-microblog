@@ -3,7 +3,9 @@
 namespace Microblog\Core\Domain\Model\Post;
 
 use Common\Structure\WatchableList;
+use Common\Utility\DomainEventPublisher;
 use DateTime;
+use Microblog\Core\Domain\Event\PostCreated;
 use Microblog\Core\Domain\Model\User\User;
 use Microblog\Core\Domain\Model\User\UserID;
 use Microblog\Core\Domain\Model\User\Username;
@@ -36,7 +38,9 @@ class Post
 
     public static function create(User $poster, string $post_content)
     {
-        return new Post(PostID::generate(), new DateTime(), $poster->id, $poster->username, $post_content, 0);
+        $post = new Post(PostID::generate(), new DateTime(), $poster->id, $poster->username, $post_content, 0);
+        DomainEventPublisher::instance()->publish(new PostCreated($post));
+        return $post;
     }
 
     public function __construct(PostID $id, DateTime $created_at, UserID $poster_id, Username $poster_username, string $content, int $likes_count)
