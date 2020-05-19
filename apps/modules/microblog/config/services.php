@@ -10,6 +10,7 @@ use Microblog\Core\Application\Service\LoginService;
 use Microblog\Core\Application\Service\RegisterService;
 use Microblog\Core\Application\Service\UnLikePostService;
 use Microblog\Core\Application\Service\ViewPostService;
+use Microblog\Core\Application\Service\EditUserService;
 use Microblog\Infrastructure\Persistence\Repository\PostRepository;
 use Microblog\Infrastructure\Persistence\Repository\UserRepository;
 use Phalcon\Di\DiInterface;
@@ -83,6 +84,11 @@ $di->set('likePostService', function() use ($di){
 $di->set('unlikePostService', function() use ($di){
     return new UnLikePostService($di->get('postRepository'));
 });
+
+$di->set('editUserService', function() use ($di){
+    return new EditUserService($di->get('userRepository'));
+});
+
 #endregion
 
 DomainEventPublisher::instance()->subscribe(new NotificationEventSubscriber($di->get('createNotificationService'), $di->get('userRepository')));
