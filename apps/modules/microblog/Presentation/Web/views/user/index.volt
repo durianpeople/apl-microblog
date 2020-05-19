@@ -11,7 +11,7 @@
             </div>
             <div class="col s12 m6">
               <span class="card-title">_defunction
-                <br><small><a href="#">@ranggakd</a></small>
+                <br><small><a href="#">@{{complete_user_info.username}}</a></small>
               </span>
               <div>
               <p>⏳on hiatus 🙂beautiful mind 🍝fried noodles |
@@ -22,7 +22,7 @@
                   East Java, Indonesialetterboxd.com/ranggakd/Born 1999Joined February 2012
                 </div>
                 <div>
-                  264 Following 166 Followers
+                  {{complete_user_info.following_count}} Following {{complete_user_info.follower_count}} Followers
                 </div>
             </div>
           </div>
