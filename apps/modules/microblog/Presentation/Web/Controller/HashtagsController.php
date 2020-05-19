@@ -11,12 +11,13 @@ class HashtagsController extends AuthenticatedController
 
     public function initialize()
     {
-        // $this->list_service = $list_service;
+        $this->list_service = $this->di->get('listAllHashtagService');
     }
 
     public function indexAction()
     {
-        $this->view->setVar('test_var', "This is set var from controller");
+        $hashtags = $this->list_service->execute();
+        $this->view->setVar('hashtags', $hashtags);
         $this->view->pick('hashtags/index');
     }
 }

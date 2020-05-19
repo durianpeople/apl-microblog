@@ -2,9 +2,10 @@
 
 namespace Microblog\Core\Domain\Model\Post;
 
+use Common\Interfaces\EqualityComparable;
 use Microblog\Core\Domain\Exception\HashtagAssertionError;
 
-class Hashtag
+class Hashtag implements EqualityComparable
 {
     protected string $hashtag;
 
@@ -18,5 +19,13 @@ class Hashtag
     public function getString(): string
     {
         return $this->hashtag;
+    }
+
+    public function equals($other_object): bool
+    {
+        if ($other_object instanceof Hashtag) {
+            return $this->hashtag == $other_object->hashtag;
+        } 
+        return false;
     }
 }
