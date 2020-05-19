@@ -79,6 +79,32 @@ class WatchableList
     }
 
     /**
+     * Update an item in container. Updated item will be in current items list and added items list.
+     * 
+     * If an item didn't exist, add the item instead.
+     *
+     * @param [type] $item
+     * @return void
+     */
+    public function update($item)
+    {
+        $this->assertItemType($item);
+
+        if (!$this->isCurrentItem($item)) {
+            $this->add($item);
+            return;
+        }
+
+        if ($this->isRemovedItem($item)) {
+            $this->removeFromRemoved($item);
+        }
+
+        if (!$this->isAddedItem($item)) {
+            $this->added_items[] = $item;
+        }
+    }
+
+    /**
      * Remove item from watchable list
      *
      * @param mixed $item

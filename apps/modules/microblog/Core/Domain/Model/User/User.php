@@ -94,4 +94,9 @@ class User
     {
         $this->notifications->add($n);
     }
+
+    public function updateNotification(Notification $n)
+    {
+        $this->notifications->update($n);
+    }
 }
