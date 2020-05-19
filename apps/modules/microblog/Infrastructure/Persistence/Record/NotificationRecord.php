@@ -8,6 +8,7 @@ class NotificationRecord extends Model
 {
     public string $guid;
     public string $owner_id;
+    public string $poster_id;
     public string $created_at;
     public string $content;
     public string $type_about;

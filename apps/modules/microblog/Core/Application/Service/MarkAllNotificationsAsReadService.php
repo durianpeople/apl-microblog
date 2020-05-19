@@ -19,7 +19,6 @@ class MarkAllNotificationsAsReadService
     public function execute(MarkAllNotificationsAsReadRequest $request)
     {
         $user = $this->user_repo->find(new UserID($request->owner_id));
-        $nid = new NotificationID($user->id, $request->guid);
         $this->user_repo->populateNotifications($user);
 
         foreach ($user->current_notifications as $n) {

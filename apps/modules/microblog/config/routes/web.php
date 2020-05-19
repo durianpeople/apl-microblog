@@ -67,3 +67,13 @@ $router->add('/read', array_merge($mod_config, [
     'controller' => 'notifikasi',
     'action' => 'read'
 ]));
+
+$router->add('/notif_delete/{guid}', array_merge($mod_config, [
+    'controller' => 'notifikasi',
+    'action' => 'delete'
+]));
+
+$router->add('/read/all', array_merge($mod_config, [
+    'controller' => 'notifikasi',
+    'action' => 'readall'
+]));
