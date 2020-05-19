@@ -2,6 +2,7 @@
 
 namespace Microblog\Infrastructure\Persistence\Repository;
 
+use Common\Structure\WatchableList;
 use Microblog\Core\Domain\Exception\NotFoundException;
 use Microblog\Core\Domain\Interfaces\IPostRepository as IPostRepository;
 use Microblog\Core\Domain\Model\Post\Hashtag;
@@ -53,22 +54,23 @@ class PostRepository implements IPostRepository
 
     public function getAllHashtags(): array
     {
-        $hashtags = [];
+        $hashtags = new WatchableList(Hashtag::class);
         foreach (HashtagRecord::find() as $hr) {
             /** @var HashtagRecord $hr */
-            $hashtags[] = new Hashtag($hr->hashtag);
+            $hashtags->add(new Hashtag($hr->hashtag));
         }
 
-        return $hashtags;
+        return $hashtags->getCurrentItems();
     }
 
     public function getPostsByHastag(Hashtag $hashtag): array
     {
         $query = new Query(
-            'SELECT PostRecord.*
-            FROM PostRecord
-            JOIN HashtagRecord
-            ON HashtagRecord.post_id = PostRecord.id',
+            'SELECT Microblog\Infrastructure\Persistence\Record\PostRecord.*
+            FROM Microblog\Infrastructure\Persistence\Record\PostRecord
+            JOIN Microblog\Infrastructure\Persistence\Record\HashtagRecord
+            ON Microblog\Infrastructure\Persistence\Record\HashtagRecord.post_id = Microblog\Infrastructure\Persistence\Record\PostRecord.id
+            AND Microblog\Infrastructure\Persistence\Record\HashtagRecord.hashtag = \'' . $hashtag->getString() . '\'',
             $this->di
         );
 

@@ -5,7 +5,9 @@ use Microblog\Core\Application\EventSubscriber\NotificationEventSubscriber;
 use Microblog\Core\Application\Service\CreateNotificationService;
 use Microblog\Core\Application\Service\CreatePostService;
 use Microblog\Core\Application\Service\LikePostService;
+use Microblog\Core\Application\Service\ListAllHashtagService;
 use Microblog\Core\Application\Service\ListAllPostByUserIDService;
+use Microblog\Core\Application\Service\ListAllPostsByHashtagService;
 use Microblog\Core\Application\Service\LoginService;
 use Microblog\Core\Application\Service\RegisterService;
 use Microblog\Core\Application\Service\UnLikePostService;
@@ -82,6 +84,14 @@ $di->set('likePostService', function() use ($di){
 
 $di->set('unlikePostService', function() use ($di){
     return new UnLikePostService($di->get('postRepository'));
+});
+
+$di->set('listAllHashtagService', function() use ($di){
+    return new ListAllHashtagService($di->get('postRepository'));
+});
+
+$di->set('listAllPostsByHashtagService', function() use ($di){
+    return new ListAllPostsByHashtagService($di->get('postRepository'), $di->get('userRepository'));
 });
 #endregion
 
