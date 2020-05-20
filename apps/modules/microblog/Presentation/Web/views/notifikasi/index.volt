@@ -5,8 +5,7 @@
     <div class="row">
       <div class="col s12">
         <div class="right">
-          <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Mark all as read</a>
-          <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Clear Notifications</a>
+          <a class='dropdown-trigger btn' href='/read/all' data-target='dropdown1'>Mark all as read</a>
         </div>
       </div>
       
@@ -27,10 +26,11 @@
             <div class="col s12">
               <!-- <a href="#"><i class="material-icons">check</i></a> -->
               {%if notif.type_about is 'post'%}
-              <a href="/read?guid={{notif.guid}}&uid={{notif.owner_id}}&type={{notif.type_about}}&id={{notif.id_about}}"><i class="material-icons">visibility</i></a>
+              <a href="/read?guid={{notif.guid}}&type={{notif.type_about}}&id={{notif.id_about}}"><i class="material-icons">search</i></a>
+              {%elseif notif.type_about is 'user'%}
+              <a href="/read?guid={{notif.guid}}&type={{notif.type_about}}&id={{notif.id_about}}"><i class="material-icons">search</i></a>
               {%endif%}
-              <a href="#"><i class="material-icons">search</i></a>
-              <a href="#"><i class="material-icons">delete</i></a>
+              <a href="/notif_delete/{{notif.guid}}"><i class="material-icons">delete</i></a>
             </div>
           </div>  
         </li>

@@ -85,6 +85,7 @@ class UserRepository implements IUserRepository
             /** @var NotificationRecord $nr */
             $notifications[] = new Notification(
                 new NotificationID(new UserID($nr->owner_id), $nr->guid),
+                new UserID($nr->poster_id),
                 new DateTime($nr->created_at),
                 $nr->content,
                 new Detail($nr->type_about, $nr->id_about),

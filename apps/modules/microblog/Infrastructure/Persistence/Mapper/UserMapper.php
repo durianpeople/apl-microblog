@@ -76,6 +76,7 @@ class UserMapper
             $nr = new NotificationRecord();
             $nr->guid = $n->id->getGUID();
             $nr->owner_id = $n->id->getUserID()->getString();
+            $nr->poster_id = $n->poster_id->getString();
             $nr->created_at = $n->created_at->format('Y-m-d H:i:s');
             $nr->content = $n->content;
             $nr->type_about = $n->detail->type;
@@ -102,6 +103,7 @@ class UserMapper
             $nr = new NotificationRecord();
             $nr->guid = $n->id->getGUID();
             $nr->owner_id = $n->id->getUserID()->getString();
+            $nr->poster_id = $n->poster_id->getString();
             $nr->created_at = $n->created_at->format('Y-m-d H:i:s');
             $nr->content = $n->content;
             $nr->type_about = $n->detail->type;

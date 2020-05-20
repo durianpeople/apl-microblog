@@ -4,16 +4,23 @@ use Common\Utility\DomainEventPublisher;
 use Microblog\Core\Application\EventSubscriber\NotificationEventSubscriber;
 use Microblog\Core\Application\Service\CreateNotificationService;
 use Microblog\Core\Application\Service\CreatePostService;
+use Microblog\Core\Application\Service\DeleteNotificationService;
 use Microblog\Core\Application\Service\LikePostService;
 use Microblog\Core\Application\Service\ListAllHashtagService;
 use Microblog\Core\Application\Service\ListAllPostByUserIDService;
 use Microblog\Core\Application\Service\ListAllPostsByHashtagService;
 use Microblog\Core\Application\Service\LoginService;
+use Microblog\Core\Application\Service\MarkAllNotificationsAsReadService;
 use Microblog\Core\Application\Service\MarkNotificationAsReadService;
 use Microblog\Core\Application\Service\RegisterService;
 use Microblog\Core\Application\Service\UnLikePostService;
+use Microblog\Core\Application\Service\DeletePostService;
 use Microblog\Core\Application\Service\ViewAllNotificationService;
 use Microblog\Core\Application\Service\ViewPostService;
+use Microblog\Core\Application\Service\EditUserService;
+use Microblog\Core\Application\Service\UnfollowUserService;
+use Microblog\Core\Application\Service\FollowUserService;
+use Microblog\Core\Application\Service\viewUserInfoService;
 use Microblog\Infrastructure\Persistence\Repository\PostRepository;
 use Microblog\Infrastructure\Persistence\Repository\UserRepository;
 use Phalcon\Di\DiInterface;
@@ -88,6 +95,10 @@ $di->set('unlikePostService', function() use ($di){
     return new UnLikePostService($di->get('postRepository'));
 });
 
+$di->set('deletePostService', function() use ($di){
+    return new DeletePostService($di->get('postRepository'));
+});
+
 $di->set('listAllHashtagService', function() use ($di){
     return new ListAllHashtagService($di->get('postRepository'));
 });
@@ -96,13 +107,40 @@ $di->set('listAllPostsByHashtagService', function() use ($di){
     return new ListAllPostsByHashtagService($di->get('postRepository'), $di->get('userRepository'));
 });
 
+$di->set('editUserService', function() use ($di){
+    return new EditUserService($di->get('userRepository'));
+});
+
+$di->set('viewUserInfoService', function() use ($di){
+    return new ViewUserInfoService($di->get('userRepository'));
+});
+
 $di->set('viewAllNotificationService', function() use ($di){
     return new ViewAllNotificationService($di->get('userRepository'));
 });
 
 $di->set('markNotificationAsReadService', function() use ($di){
     return new MarkNotificationAsReadService($di->get('userRepository'));
+
 });
+
+
+$di->set('followUserService', function() use ($di){
+    return new FollowUserService($di->get('userRepository'));
+});
+
+$di->set('unfollowUserService', function() use ($di){
+    return new UnfollowUserService($di->get('userRepository'));
+});
+  
+$di->set('markAllNotificationsAsReadService', function() use ($di){
+    return new MarkAllNotificationsAsReadService($di->get('userRepository'));
+});
+
+$di->set('deleteNotificationService', function() use ($di){
+    return new DeleteNotificationService($di->get('userRepository'));
+});
+
 #endregion
 
 DomainEventPublisher::instance()->subscribe(new NotificationEventSubscriber($di->get('createNotificationService'), $di->get('userRepository')));

@@ -96,7 +96,7 @@ class User
     public function follow(User $user)
     {
         $this->following->add($user->id);
-        DomainEventPublisher::instance()->publish(new UserFollowed($user->id));
+        DomainEventPublisher::instance()->publish(new UserFollowed($user->id, $this->id));
     }
 
     public function unfollow(User $user)

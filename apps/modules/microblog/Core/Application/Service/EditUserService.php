@@ -17,15 +17,15 @@ class EditUserService
         $this->user_repo = $user_repo;
     }
 
-    public function execute(EditUserRequest $request): bool
+    public function execute(EditUserRequest $request)
     {
         $user = $this->user_repo->find(new UserID($request->user_id));
 
-        if (isset($request->username)) {
+        if ($request->username != null) {
             $user->changeUsername(new Username($request->username));
         }
 
-        if (isset($request->new_password)) {
+        if ($request->new_password != null) {
             $user->changePassword($request->old_password, Password::createFromString($request->new_password));
         }
 

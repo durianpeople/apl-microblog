@@ -48,6 +48,22 @@ $router->add('/h/{hashtag}', array_merge($mod_config, [
     'action' => 'index'
 ]));
 
+$router->add('/user/{id}', array_merge($mod_config, [
+    'controller' => 'user',
+    'action' => 'index'
+]));
+
+
+$router->add('/follow/{id}', array_merge($mod_config, [
+    'controller' => 'follow',
+    'action' => 'follow'
+]));
+
+$router->add('/unfollow/{id}', array_merge($mod_config, [
+    'controller' => 'follow',
+    'action' => 'unfollow'
+]));
+
 $router->add('/post/{id}', array_merge($mod_config, [
     'controller' => 'postdetail',
     'action' => 'index'
@@ -63,7 +79,22 @@ $router->add('/post/unlike/{id}', array_merge($mod_config, [
     'action' => 'unlike'
 ]));
 
+$router->add('/post/delete/{id}', array_merge($mod_config, [
+    'controller' => 'postdetail',
+    'action' => 'delete'
+]));
+
 $router->add('/read', array_merge($mod_config, [
     'controller' => 'notifikasi',
     'action' => 'read'
+]));
+
+$router->add('/notif_delete/{guid}', array_merge($mod_config, [
+    'controller' => 'notifikasi',
+    'action' => 'delete'
+]));
+
+$router->add('/read/all', array_merge($mod_config, [
+    'controller' => 'notifikasi',
+    'action' => 'readall'
 ]));
