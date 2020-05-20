@@ -27,6 +27,8 @@
               <!-- <a href="#"><i class="material-icons">check</i></a> -->
               {%if notif.type_about is 'post'%}
               <a href="/read?guid={{notif.guid}}&type={{notif.type_about}}&id={{notif.id_about}}"><i class="material-icons">search</i></a>
+              {%elseif notif.type_about is 'user'%}
+              <a href="/read?guid={{notif.guid}}&type={{notif.type_about}}&id={{notif.id_about}}"><i class="material-icons">search</i></a>
               {%endif%}
               <a href="/notif_delete/{{notif.guid}}"><i class="material-icons">delete</i></a>
             </div>

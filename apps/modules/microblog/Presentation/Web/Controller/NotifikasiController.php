@@ -51,6 +51,8 @@ class NotifikasiController extends AuthenticatedController
         switch ($type) {
             case 'post':
                 return $this->response->redirect('/post/'.$id);
+            case 'user':
+                return $this->response->redirect('/user/'.$id);
         }
     }
 

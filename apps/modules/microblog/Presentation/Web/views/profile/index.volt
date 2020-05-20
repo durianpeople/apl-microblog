@@ -9,10 +9,7 @@
               <span class="card-title">Profile</span>  
             </div>
             <form action="/profile" method="post">
-              <div class="input-field col s12">
-                <input placeholder="user_id" id="user_id" type="text" class="validate" name="user_id" value='{{user_info.id}}'>
-                <label for="user_id">user_id</label>
-              </div>
+            <input placeholder="user_id" id="user_id" type="hidden" class="validate" name="user_id" value='{{user_info.id}}'>
               <div class="input-field col s12">
                 <input placeholder="Username" id="username" type="text" class="validate" name="username" value='{{user_info.username}}'>
                 <label for="username">Username</label>
