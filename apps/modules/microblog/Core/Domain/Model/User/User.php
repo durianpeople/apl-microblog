@@ -95,8 +95,10 @@ class User
 
     public function follow(User $user)
     {
-        $this->following->add($user->id);
-        DomainEventPublisher::instance()->publish(new UserFollowed($user->id, $this->id));
+        if (!$this->id->equals($user->id)) {
+            $this->following->add($user->id);
+            DomainEventPublisher::instance()->publish(new UserFollowed($user->id, $this->id));
+        }
     }
 
     public function unfollow(User $user)
@@ -106,16 +108,22 @@ class User
 
     public function addNotification(Notification $n)
     {
-        $this->notifications->add($n);
+        if ($n->id->getUserID()->equals($this->id)) {
+            $this->notifications->add($n);
+        }
     }
 
     public function updateNotification(Notification $n)
     {
-        $this->notifications->update($n);
+        if ($n->id->getUserID()->equals($this->id)) {
+            $this->notifications->update($n);
+        }
     }
 
     public function deleteNotification(Notification $n)
     {
-        $this->notifications->remove($n);
+        if ($n->id->getUserID()->equals($this->id)) {
+            $this->notifications->add($n);
+        }
     }
 }
