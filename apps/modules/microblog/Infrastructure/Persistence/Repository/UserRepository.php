@@ -55,6 +55,23 @@ class UserRepository implements IUserRepository
 
         return $users;
     }
+    
+    public function getAllByUsername(string $username): array
+    {
+        $user_records = UserRecord::find([
+            'conditions' => 'username like :username:',
+            'bind' => [
+                'username' => '%'.$username.'%'
+            ]
+        ]);
+
+        $users = [];
+        foreach ($user_records as $usr) {
+            $users[] = UserMapper::toModel($usr);
+        }
+
+        return $users;
+    }
 
     public function findByUserPass(string $username, string $password): User
     {
