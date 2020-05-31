@@ -4,8 +4,8 @@ namespace Microblog\Core\Application\Service;
 
 use Common\Utility\TrxClosure;
 use Microblog\Core\Application\Request\CreatePostRequest;
-use Microblog\Core\Domain\Interfaces\IPostRepository;
-use Microblog\Core\Domain\Interfaces\IUserRepository;
+use Microblog\Core\Domain\Repository\IPostRepository;
+use Microblog\Core\Domain\Repository\IUserRepository;
 use Microblog\Core\Domain\Model\Post\Post;
 use Microblog\Core\Domain\Model\User\UserID;
 use Phalcon\Mvc\Model\Transaction\Manager;

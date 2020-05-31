@@ -7,7 +7,7 @@ use Common\Utility\TrxClosure;
 use DateTime;
 use Microblog\Core\Domain\Exception\NotFoundException;
 use Microblog\Core\Domain\Exception\WrongPasswordException;
-use Microblog\Core\Domain\Interfaces\IUserRepository;
+use Microblog\Core\Domain\Repository\IUserRepository;
 use Microblog\Core\Domain\Model\User\Detail;
 use Microblog\Core\Domain\Model\User\Notification;
 use Microblog\Core\Domain\Model\User\NotificationID;
@@ -42,6 +42,18 @@ class UserRepository implements IUserRepository
             throw new NotFoundException;
 
         return UserMapper::toModel($user_record);
+    }
+
+    public function getAll(): array
+    {
+        $user_records = UserRecord::find();
+
+        $users = [];
+        foreach ($user_records as $usr) {
+            $users[] = UserMapper::toModel($usr);
+        }
+
+        return $users;
     }
 
     public function findByUserPass(string $username, string $password): User

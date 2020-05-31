@@ -2,8 +2,7 @@
 
 namespace Microblog\Core\Application\Request;
 
-class DeletePostRequest
+class ListAllUsersRequest
 {
-    public string $post_id;
     public string $user_id;
 }

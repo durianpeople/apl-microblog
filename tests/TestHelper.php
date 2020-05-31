@@ -40,7 +40,7 @@ $loader->registerNamespaces([
     'Microblog\Core\Domain\Model\User' => APP_PATH . '/modules/microblog/Core/Domain/Model/User',
     'Microblog\Core\Domain\Model\Post' => APP_PATH . '/modules/microblog/Core/Domain/Model/Post',
     'Microblog\Core\Domain\Model\User' => APP_PATH . '/modules/microblog/Core/Domain/Model/User',
-    'Microblog\Core\Domain\Interfaces' => APP_PATH . '/modules/microblog/Core/Domain/Interfaces',
+    'Microblog\Core\Domain\Repository' => APP_PATH . '/modules/microblog/Core/Domain/Repository',
 
     'Microblog\Infrastructure\Persistence\Mapper' => APP_PATH . '/modules/microblog/Infrastructure/Persistence/Mapper',
     'Microblog\Infrastructure\Persistence\Repository' => APP_PATH . '/modules/microblog/Infrastructure/Persistence/Repository',

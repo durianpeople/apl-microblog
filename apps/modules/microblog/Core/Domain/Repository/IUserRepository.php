@@ -1,6 +1,6 @@
 <?php
 
-namespace Microblog\Core\Domain\Interfaces;
+namespace Microblog\Core\Domain\Repository;
 
 use Microblog\Core\Domain\Model\User\User;
 use Microblog\Core\Domain\Model\User\UserID;

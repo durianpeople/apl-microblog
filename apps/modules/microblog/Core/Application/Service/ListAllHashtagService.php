@@ -3,7 +3,7 @@
 namespace Microblog\Core\Application\Service;
 
 use Microblog\Core\Application\Response\HashtagInfo;
-use Microblog\Core\Domain\Interfaces\IPostRepository;
+use Microblog\Core\Domain\Repository\IPostRepository;
 
 class ListAllHashtagService
 {

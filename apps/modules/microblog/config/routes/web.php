@@ -33,6 +33,11 @@ $router->add('/profile', array_merge($mod_config, [
     'action' => 'index'
 ]));
 
+$router->add('/search', array_merge($mod_config, [
+    'controller' => 'search',
+    'action' => 'index'
+]));
+
 $router->add('/', array_merge($mod_config, [
     'controller' => 'welcome',
     'action' => 'index'

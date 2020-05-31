@@ -7,7 +7,7 @@ use Microblog\Core\Application\Request\CreateNotificationRequest;
 use Microblog\Core\Application\Service\CreateNotificationService;
 use Microblog\Core\Domain\Event\PostCreated;
 use Microblog\Core\Domain\Event\UserFollowed;
-use Microblog\Core\Domain\Interfaces\IUserRepository;
+use Microblog\Core\Domain\Repository\IUserRepository;
 use Microblog\Core\Domain\Model\User\UserID;
 
 class NotificationEventSubscriber implements DomainEventSubscriber

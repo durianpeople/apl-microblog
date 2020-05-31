@@ -2,18 +2,15 @@
 
 namespace Microblog\Core\Application\Service;
 
-use Microblog\Core\Application\Request\ListAllPostsByUserIDRequest;
-use Microblog\Core\Application\Response\PostInfo;
-use Microblog\Core\Domain\Repository\IPostRepository;
+use Microblog\Core\Application\Request\ListAllUsers;
 use Microblog\Core\Domain\Repository\IUserRepository;
 use Microblog\Core\Domain\Model\User\UserID;
 
-class ListAllPostByUserIDService
+class ListAllUsersService
 {
-    protected IPostRepository $post_repo;
     protected IUserRepository $user_repo;
 
-    public function __construct(IPostRepository $post_repo, IUserRepository $user_repo)
+    public function __construct(IUserRepository $user_repo)
     {
         $this->post_repo = $post_repo;
         $this->user_repo = $user_repo;
@@ -22,8 +19,8 @@ class ListAllPostByUserIDService
     /**
      * 
      *
-     * @param ListAllPostsByUserIDRequest $request
-     * @return PostInfo[]
+     * @param ListAllUsersIDRequest $request
+     * @return UserInfo[]
      */
     public function execute(ListAllPostsByUserIDRequest $request): array
     {

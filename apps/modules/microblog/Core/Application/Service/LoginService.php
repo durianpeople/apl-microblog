@@ -4,7 +4,7 @@ namespace Microblog\Core\Application\Service;
 
 use Microblog\Core\Application\Request\LoginRequest;
 use Microblog\Core\Application\Response\UserInfo;
-use Microblog\Core\Domain\Interfaces\IUserRepository;
+use Microblog\Core\Domain\Repository\IUserRepository;
 
 class LoginService
 {

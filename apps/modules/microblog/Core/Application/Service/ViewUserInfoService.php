@@ -4,7 +4,7 @@ namespace Microblog\Core\Application\Service;
 
 use Microblog\Core\Application\Request\ViewUserInfoRequest;
 use Microblog\Core\Application\Response\CompleteUserInfo;
-use Microblog\Core\Domain\Interfaces\IUserRepository;
+use Microblog\Core\Domain\Repository\IUserRepository;
 use Microblog\Core\Domain\Model\User\UserID;
 
 class ViewUserInfoService
