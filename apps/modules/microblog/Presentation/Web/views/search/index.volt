@@ -12,7 +12,7 @@
                     <div class="col s1"><img src="images/tes.jpg" alt="" class="circle responsive-img"></div>
                     <div class="col s8">
                         <label for="icon_prefix2">Find your friends</label>
-                        <textarea id="icon_prefix2" class="materialize-textarea" name="content"></textarea>
+                        <textarea id="icon_prefix2" class="materialize-textarea" name="username"></textarea>
         
                         <button class="btn waves-effect waves-light, blue" type="submit" name="action">Search
                             <i class="material-icons right">search</i>
@@ -24,15 +24,15 @@
         </div>
 
     <!-- Post List -->
-        {%for p in posts%}
-        <a href="/post/{{p.id}}" class="collection-item">
+        {%for user in users%}
+        <a href="/user/{{user.id}}" class="collection-item">
             <div class="col s12 m8 offset-m2 l6 offset-l3">
                 <div class="row valign-wrapper">
                         <div class="col s1">
                             <img src="images/tes.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
                         </div>
                         <div class="col s12">
-                            <span class="black-text">{{p.username}}</span>
+                            <span class="black-text">{{user.username}}</span>
                         </div>
                 </div>
             </div>

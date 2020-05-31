@@ -9,6 +9,8 @@ use Microblog\Core\Application\Service\LikePostService;
 use Microblog\Core\Application\Service\ListAllHashtagService;
 use Microblog\Core\Application\Service\ListAllPostByUserIDService;
 use Microblog\Core\Application\Service\ListAllPostsByHashtagService;
+use Microblog\Core\Application\Service\ListAllUsersService;
+use Microblog\Core\Application\Service\ListAllUsersByUsernameService;
 use Microblog\Core\Application\Service\LoginService;
 use Microblog\Core\Application\Service\MarkAllNotificationsAsReadService;
 use Microblog\Core\Application\Service\MarkNotificationAsReadService;
@@ -77,6 +79,14 @@ $di->set('createNotificationService', function () use ($di) {
 
 $di->set('listAllPostByUserIDService', function () use ($di) {
     return new ListAllPostByUserIDService($di->get('postRepository'), $di->get('userRepository'));
+});
+
+$di->set('listAllUsersService', function () use ($di) {
+    return new ListAllUsersService($di->get('userRepository'));
+});
+
+$di->set('listAllUsersByUsernameService', function () use ($di) {
+    return new ListAllUsersByUsernameService($di->get('userRepository'));
 });
 
 $di->set('createPostService', function() use ($di){
