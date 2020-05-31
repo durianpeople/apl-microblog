@@ -14,4 +14,5 @@ class UserInfo
         $this->id = $user->id->getString();
         $this->username = $user->username->getString();
     }
+
 }
