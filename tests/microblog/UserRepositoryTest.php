@@ -1,7 +1,7 @@
 <?php
 
 use Microblog\Core\Domain\Exception\NotFoundException;
-use Microblog\Core\Domain\Interfaces\IUserRepository;
+use Microblog\Core\Domain\Repository\IUserRepository;
 use Microblog\Core\Domain\Model\User\Password;
 use Microblog\Core\Domain\Model\User\User;
 use Microblog\Core\Domain\Model\User\UserID;

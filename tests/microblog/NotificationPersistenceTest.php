@@ -1,6 +1,6 @@
 <?php
 
-use Microblog\Core\Domain\Interfaces\IUserRepository;
+use Microblog\Core\Domain\Repository\IUserRepository;
 use Microblog\Core\Domain\Model\User\Detail;
 use Microblog\Core\Domain\Model\User\Notification;
 use Microblog\Core\Domain\Model\User\Password;

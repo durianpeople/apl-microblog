@@ -3,7 +3,7 @@
 namespace Microblog\Core\Application\Service;
 
 use Microblog\Core\Application\Request\RegisterRequest;
-use Microblog\Core\Domain\Interfaces\IUserRepository;
+use Microblog\Core\Domain\Repository\IUserRepository;
 use Microblog\Core\Domain\Model\User\User;
 
 class RegisterService

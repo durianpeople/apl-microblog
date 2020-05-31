@@ -3,7 +3,7 @@
 namespace Microblog\Core\Application\Service;
 
 use Microblog\Core\Application\Request\CreateNotificationRequest;
-use Microblog\Core\Domain\Interfaces\IUserRepository;
+use Microblog\Core\Domain\Repository\IUserRepository;
 use Microblog\Core\Domain\Model\User\Detail;
 use Microblog\Core\Domain\Model\User\Notification;
 use Microblog\Core\Domain\Model\User\UserID;

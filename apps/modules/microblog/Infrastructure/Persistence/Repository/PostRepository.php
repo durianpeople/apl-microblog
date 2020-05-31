@@ -4,7 +4,7 @@ namespace Microblog\Infrastructure\Persistence\Repository;
 
 use Common\Structure\WatchableList;
 use Microblog\Core\Domain\Exception\NotFoundException;
-use Microblog\Core\Domain\Interfaces\IPostRepository as IPostRepository;
+use Microblog\Core\Domain\Repository\IPostRepository as IPostRepository;
 use Microblog\Core\Domain\Model\Post\Hashtag;
 use Microblog\Core\Domain\Model\Post\Post;
 use Microblog\Core\Domain\Model\Post\PostID;

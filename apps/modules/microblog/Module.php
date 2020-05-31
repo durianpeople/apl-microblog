@@ -14,7 +14,7 @@ class Module implements ModuleDefinitionInterface
 
         $loader->registerNamespaces([
 
-            'Microblog\Core\Domain\Interfaces' => __DIR__ . '/Core/Domain/Interfaces',
+            'Microblog\Core\Domain\Repository' => __DIR__ . '/Core/Domain/Repository',
             'Microblog\Core\Domain\Event' => __DIR__ . '/Core/Domain/Event',
             'Microblog\Core\Domain\Exception' => __DIR__ . '/Core/Domain/Exception',
             'Microblog\Core\Domain\Model' => __DIR__ . '/Core/Domain/Model',

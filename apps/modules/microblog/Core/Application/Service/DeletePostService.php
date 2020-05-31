@@ -3,7 +3,7 @@
 namespace Microblog\Core\Application\Service;
 
 use Microblog\Core\Application\Request\DeletePostRequest;
-use Microblog\Core\Domain\Interfaces\IPostRepository;
+use Microblog\Core\Domain\Repository\IPostRepository;
 use Microblog\Core\Domain\Model\Post\PostID;
 
 class DeletePostService
@@ -18,6 +18,9 @@ class DeletePostService
     public function execute(DeletePostRequest $request)
     {
         $post = $this->post_repo->find(new PostID($request->post_id));
-        $this->post_repo->delete($post);
+        if($request->user_id == $post->__get('poster_id') )
+        {
+            $this->post_repo->delete($post);
+        }
     }
 }

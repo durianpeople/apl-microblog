@@ -4,8 +4,8 @@ namespace Microblog\Core\Application\Service;
 
 use Microblog\Core\Application\Request\ListAllPostsByUserIDRequest;
 use Microblog\Core\Application\Response\PostInfo;
-use Microblog\Core\Domain\Interfaces\IPostRepository;
-use Microblog\Core\Domain\Interfaces\IUserRepository;
+use Microblog\Core\Domain\Repository\IPostRepository;
+use Microblog\Core\Domain\Repository\IUserRepository;
 use Microblog\Core\Domain\Model\User\UserID;
 
 class ListAllPostByUserIDService

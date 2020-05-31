@@ -1,8 +1,8 @@
 <?php
 
 use Microblog\Core\Domain\Exception\NotFoundException;
-use Microblog\Core\Domain\Interfaces\IPostRepository;
-use Microblog\Core\Domain\Interfaces\IUserRepository;
+use Microblog\Core\Domain\Repository\IPostRepository;
+use Microblog\Core\Domain\Repository\IUserRepository;
 use Microblog\Core\Domain\Model\Post\Post;
 use Microblog\Core\Domain\Model\Post\PostID;
 use Microblog\Core\Domain\Model\User\Password;
