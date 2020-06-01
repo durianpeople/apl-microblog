@@ -2,12 +2,12 @@
 
 namespace Microblog\Core\Application\Service;
 
-use Microblog\Core\Application\Request\ListAllUsersRequest;
+use Microblog\Core\Application\Request\ListAllUsersByUsernameRequest;
 use Microblog\Core\Application\Response\UserInfo;
 use Microblog\Core\Domain\Repository\IUserRepository;
 use Microblog\Core\Domain\Model\User\UserID;
 
-class ListAllUsersService
+class ListAllUsersByUsernameService
 {
     protected IUserRepository $user_repo;
 
@@ -22,11 +22,11 @@ class ListAllUsersService
      * @param ListAllUsersRequest $request
      * @return UserInfo[]
      */
-    public function execute(ListAllUsersRequest $request): array
+    public function execute(ListAllUsersByUsernameRequest $request): array
     {
         $user_infos = [];
 
-        $users = $this->user_repo->getAll();
+        $users = $this->user_repo->getAllByUsername($request->username);
         foreach ($users as $u) {
             $user_infos[] = new UserInfo($u);
         }
